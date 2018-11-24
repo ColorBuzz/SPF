@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -455,21 +456,35 @@ public abstract class StorageFragment extends Fragment {
 
         private ProgressDialog dialog;
         List<Object> files;
+        List<Long> bufferId=new ArrayList<>();
 
-        public CopyTask( ) {
-            dialog = new ProgressDialog(getContext());
-            dialog.setTitle(getResources().getString(R.string.importText));
-            dialog.setIndeterminate(false);
-            dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            dialog.setCancelable(false);
-         }
+          ModelDataBase db;
 
         @Override
         protected void onPreExecute() {
             finishCheckableActionMode();
 
-            dialog.show();
+            db=new ModelDataBase(getContext());
+            dialog = new ProgressDialog(getContext());
+            dialog.setTitle(getResources().getString(R.string.importText));
+            dialog.setIndeterminate(false);
+            dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            dialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.dialog_cancel), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
 
+                    if(getStatus().equals(Status.RUNNING)){
+
+                       cancel(true);
+
+
+                    }
+
+                }
+            });
+            dialog.setCancelable(false);
+
+         dialog.show();
         }
 
         @Override
@@ -479,7 +494,7 @@ public abstract class StorageFragment extends Fragment {
             String text = "";
 
             files = new ArrayList<>();
-            final ModelDataBase db= new ModelDataBase(getContext());
+
 
             files.addAll(Arrays.asList(params));
             dialog.setMax(files.size());
@@ -502,7 +517,7 @@ public abstract class StorageFragment extends Fragment {
 
                     decoder.getSpfModel().setDirectory(((FileItem) files.get(i)).getCategory());
 
-                    db.addNewModel(decoder.getSpfModel());
+                   bufferId.add(db.addNewModel(decoder.getSpfModel()));
 
 
 
@@ -522,6 +537,8 @@ public abstract class StorageFragment extends Fragment {
 
                 }
             }
+
+            db.closeDB();
 
             return ((FileItem)files.get(0)).getCategory();
         }
@@ -545,8 +562,22 @@ public abstract class StorageFragment extends Fragment {
             dialog.setProgress(values[0]);
         }
 
+        @Override
+        protected void onCancelled() {
+
+            db.closeDB();
+
+            super.onCancelled();
 
 
+
+        }
+
+        @Override
+        protected void onCancelled(String s) {
+            db.closeDB();
+            super.onCancelled(s);
+        }
     }
 
     public void showSnackbar(String mssg,final String directory) {

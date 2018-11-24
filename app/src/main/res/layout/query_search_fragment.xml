@@ -33,9 +33,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:paddingBottom="16dp"
+        android:paddingBottom="8dp"
         android:paddingLeft="32dp"
-        android:paddingRight="32dp">
+        android:paddingRight="32dp"
+        android:paddingTop="8dp">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -50,10 +51,10 @@
                 android:layout_height="wrap_content"
                 android:background="@color/iconsColor"
                 android:clickable="true"
-                android:textColorHint="@color/textColorPrimary"
                 android:iconifiedByDefault="false"
                 android:queryHint="@string/action_search"
                 android:textColor="@color/textColorPrimary"
+                android:textColorHint="@color/textColorPrimary"
                 app:closeIcon="@drawable/ic_close_black_24dp"
                 app:commitIcon="@drawable/ic_search_grey_24dp"
                 app:defaultQueryHint="@string/action_search"

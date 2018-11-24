@@ -530,12 +530,12 @@ public class ModelDataBase extends SQLiteOpenHelper {
                 +  " BEGIN INSERT INTO " + FTS_CUTNOTE_LIST + " (docid," +  MODEL_COLUMN_NAME +","+ CUTNOTE_COLUMN_REFERENCE +","+ CUTNOTE_COLUMN_STATUS +","
                 + CUTNOTE_COLUMN_PAIR_COUNT + ","+CUSTUMER_COLUMN_NAME
                 +") VALUES " + "(new."+ KEY_ID
-                +", (SELECT " + MODEL_COLUMN_NAME +" FROM " + TABLE_MODEL  + " WHERE " + KEY_ID + " IN (SELECT " + KEY_MODEL_ID + " FROM " + TABLE_MODEL_CUTNOTE_LIST_RELATIONS + " tmcl"
-                + " WHERE tcml." + KEY_CUTNOTE_LIST_ID + " = " + "new." + KEY_ID +"))"
+                +",(SELECT " + MODEL_COLUMN_NAME +" FROM " + TABLE_MODEL  + " WHERE " + KEY_ID + " IN (SELECT " + KEY_MODEL_ID + " FROM " + TABLE_MODEL_CUTNOTE_LIST_RELATIONS + " tmcl"
+                + " WHERE tmcl." + KEY_CUTNOTE_LIST_ID + " = " + "new." + KEY_ID +"))"
                 +",(SELECT " + CUSTUMER_COLUMN_NAME +" FROM " + TABLE_CUSTUMER  + " WHERE " + KEY_ID + " IN (SELECT " + KEY_CUSTUMER_ID + " FROM " + TABLE_MODEL_CUSTUMER_RELATIONS + " tmc"
                 + " WHERE tmc." + KEY_MODEL_ID  + " IN (SELECT " + KEY_MODEL_ID + " FROM " + TABLE_MODEL_CUTNOTE_LIST_RELATIONS + " tmcl"
                 + " WHERE tmcl." + KEY_CUTNOTE_LIST_ID + " = " + "new." + KEY_ID + ")))"
-                + ",new."+ CUTNOTE_COLUMN_STATUS+",new."+ CUTNOTE_COLUMN_REFERENCE+",new."+ CUTNOTE_COLUMN_PAIR_COUNT+"); END;");
+                + ",new." + CUTNOTE_COLUMN_STATUS + ",new." + CUTNOTE_COLUMN_REFERENCE + ",new." + CUTNOTE_COLUMN_PAIR_COUNT + "); END;");
 
 
 
@@ -1148,7 +1148,7 @@ public class ModelDataBase extends SQLiteOpenHelper {
 
                     if(i==0){
 
-                        SPFdecoder.extraData(pieceList.get(i),mContext);
+                       // SPFdecoder.extraData(pieceList.get(i),mContext);
 
                     }
 
@@ -3162,7 +3162,7 @@ public class ModelDataBase extends SQLiteOpenHelper {
         cutNoteList.setId(cursor.getInt(0));
         cutNoteList.setModel(getModelNameAtCutNoteList(cursor.getInt(0)));
         cutNoteList.setReference(cursor.getInt(1));
-        cutNoteList.setStatus(cutNoteStatus.valueOf(cursor.getString(2)));
+        cutNoteList.setStatus(Utils.convertStringToStatus(mContext,cursor.getString(2)));
         cutNoteList.setMaxPairCount( (cursor.getInt(3)));
         cutNoteList.setTotalPairCount( (cursor.getInt(4)));
         cutNoteList.setDate(cursor.getString(5));
@@ -3420,7 +3420,7 @@ public class ModelDataBase extends SQLiteOpenHelper {
         long id=0;
         cutNoteList.setReference(getNewReference());
 
-        id=insertCutNoteList(cutNoteList.getModelId(),cutNoteList.getReference(),cutNoteList.getStatus().name(),cutNoteList.getMaxPairCount(),cutNoteList.getTotalPairCount(),getDate());
+        id=insertCutNoteList(cutNoteList.getModelId(),cutNoteList.getReference(),Utils.convertStatusToString(mContext,cutNoteList.getStatus()),cutNoteList.getMaxPairCount(),cutNoteList.getTotalPairCount(),getDate());
 
         if(!cutNoteList.getCutNoteList().isEmpty()) {
 
@@ -3439,7 +3439,7 @@ public class ModelDataBase extends SQLiteOpenHelper {
         ContentValues contentValues=new ContentValues();
         contentValues.put("docid",id);
         contentValues.put(MODEL_COLUMN_NAME,getModelNameAtCutNoteList(id));
-        contentValues.put(CUTNOTE_COLUMN_STATUS,cutNoteList.getStatus().name());
+        contentValues.put(CUTNOTE_COLUMN_STATUS,Utils.convertStatusToString(mContext,cutNoteList.getStatus()));
         contentValues.put(CUTNOTE_COLUMN_REFERENCE,cutNoteList.getReference());
         contentValues.put(CUTNOTE_COLUMN_PAIR_COUNT,String.valueOf(cutNoteList.getTotalPairCount()));
         contentValues.put(CUSTUMER_COLUMN_NAME,getCustumerNameAtModel(cutNoteList.getModelId()));
@@ -3650,9 +3650,8 @@ public class ModelDataBase extends SQLiteOpenHelper {
 
     public boolean updateCutNoteList(CutNoteList cutNoteList) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String filter = "_id=";
         ContentValues contentValues = new ContentValues();
-        contentValues.put(CUTNOTE_COLUMN_STATUS, cutNoteList.getStatus().name());
+        contentValues.put(CUTNOTE_COLUMN_STATUS, Utils.convertStatusToString(mContext,cutNoteList.getStatus()));
         contentValues.put(CUTNOTE_COLUMN_MAX_PAIR_COUNT, cutNoteList.getMaxPairCount());
         contentValues.put(CUTNOTE_COLUMN_PAIR_COUNT, cutNoteList.getTotalPairCount());
 
@@ -3673,15 +3672,14 @@ public class ModelDataBase extends SQLiteOpenHelper {
 
         }
 
-        return db.update(TABLE_CUNOTE_LIST, contentValues, filter + "=" + String.valueOf(cutNoteList.getId()), null) > 0;
+        return db.update(TABLE_CUNOTE_LIST, contentValues, KEY_ID + "=" + String.valueOf(cutNoteList.getId()), null) > 0;
     }
 
-    public boolean updateCutNoteListStatusById(long cutNoteListId ,String status) {
+    public boolean updateCutNoteListStatusById(long cutNoteListId ,CutNote.cutNoteStatus status) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String filter = "_id=";
         ContentValues contentValues = new ContentValues();
-        contentValues.put(CUTNOTE_COLUMN_STATUS, status);
-         return db.update(TABLE_CUNOTE_LIST, contentValues, filter + "=" + String.valueOf(cutNoteListId), null) > 0;
+        contentValues.put(CUTNOTE_COLUMN_STATUS, Utils.convertStatusToString(mContext,status));
+         return db.update(TABLE_CUNOTE_LIST, contentValues, KEY_ID + "=" + String.valueOf(cutNoteListId), null) > 0;
     }
 
     public boolean deleteCutNoteList(long cutNoteListId){
@@ -3810,17 +3808,17 @@ public class ModelDataBase extends SQLiteOpenHelper {
 
         Category category=new Category();
         category.setName(mContext.getResources().getString(R.string.cutNotes_status_in_progress));
-        category.setItemCount(getCutNoteListCountAtStatus(category.getName()));
+        category.setItemCount(getCutNoteListCountAtStatus(Utils.convertStringToStatus(mContext,category.getName())));
         categories.add(category);
 
         Category category1=new Category();
         category1.setName(mContext.getResources().getString(R.string.cutNotes_status_indeterminated));
-        category1.setItemCount(getCutNoteListCountAtStatus(category1.getName()));
+        category1.setItemCount(getCutNoteListCountAtStatus(Utils.convertStringToStatus(mContext,category1.getName())));
         categories.add(category1);
 
         Category category2=new Category();
         category2.setName(mContext.getResources().getString(R.string.cutNotes_status_finished));
-        category2.setItemCount(getCutNoteListCountAtStatus(category2.getName()));
+        category2.setItemCount(getCutNoteListCountAtStatus(Utils.convertStringToStatus(mContext,category2.getName())));
         categories.add(category2);
 
 
@@ -3830,7 +3828,7 @@ public class ModelDataBase extends SQLiteOpenHelper {
 
     }
 
-    public Integer getCutNoteListCountAtStatus(String status){
+    public Integer getCutNoteListCountAtStatus(CutNote.cutNoteStatus status){
 
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -3842,7 +3840,7 @@ public class ModelDataBase extends SQLiteOpenHelper {
 
 
         Cursor cursor = db.rawQuery(
-                "select * from " + TABLE_CUNOTE_LIST + " where " + filter + "= ?", new String[]{ Utils.convertStringToStatus(mContext,status).name()});
+                "select * from " + TABLE_CUNOTE_LIST + " where " + filter + "= ?", new String[]{ Utils.convertStatusToString(mContext,status)});
 
 
         count=cursor.getCount();
@@ -3958,7 +3956,7 @@ public class ModelDataBase extends SQLiteOpenHelper {
 
         if(note.getStatus().equals(cutNoteStatus.IN_PROGRESS)){
 
-            updateCutNoteListStatusById(getCutNoteListByReference(note.getReference()).getId(),cutNoteStatus.IN_PROGRESS.name());
+            updateCutNoteListStatusById(getCutNoteListByReference(note.getReference()).getId(),cutNoteStatus.IN_PROGRESS);
 
         }
 

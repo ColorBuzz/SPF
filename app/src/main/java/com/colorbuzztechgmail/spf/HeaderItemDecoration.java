@@ -61,6 +61,8 @@ public class HeaderItemDecoration extends RecyclerView.ItemDecoration {
         super.onDrawOver(c, parent, state);
 
 
+
+
             View topChild = parent.getChildAt(0);
             if ((topChild) == null) {
                 return;
@@ -85,26 +87,33 @@ public class HeaderItemDecoration extends RecyclerView.ItemDecoration {
              currentHeader = getHeaderViewForItem(topChildPosition, parent);
 
 
-            fixLayoutSize(parent, currentHeader);
-            int contactPoint = currentHeader.getBottom();
-            View childInContact = getChildInContact(parent, contactPoint);
-            if ((childInContact) != null) {
-                if (mListener.isHeader(parent.getChildAdapterPosition(childInContact))) {
-                    moveHeader(c, currentHeader, childInContact);
-                    return;
+            if(currentHeader!=null) {
+                fixLayoutSize(parent, currentHeader);
+                int contactPoint = currentHeader.getBottom();
+                View childInContact = getChildInContact(parent, contactPoint);
+                if ((childInContact) != null) {
+                    if (mListener.isHeader(parent.getChildAdapterPosition(childInContact))) {
+                        moveHeader(c, currentHeader, childInContact);
+                        return;
+                    }
                 }
-            }
 
-            drawHeader(c, currentHeader);
+                drawHeader(c, currentHeader);
+            }
         }
 
 
     private View getHeaderViewForItem(int itemPosition, RecyclerView parent) {
-        int headerPosition = mListener.getHeaderPositionForItem(itemPosition);
-        int layoutResId = mListener.getHeaderLayout(headerPosition);
-        View header = LayoutInflater.from(parent.getContext()).inflate(layoutResId, parent, false);
-        mListener.bindHeaderData(header, headerPosition);
-        return header;
+
+        if(mListener.isHeader(itemPosition)) {
+            int headerPosition = mListener.getHeaderPositionForItem(itemPosition);
+            int layoutResId = mListener.getHeaderLayout(headerPosition);
+            View header = LayoutInflater.from(parent.getContext()).inflate(layoutResId, parent, false);
+            mListener.bindHeaderData(header, headerPosition);
+            return header;
+        }
+
+        return null;
     }
 
     private void drawHeader(Canvas c, View header) {
@@ -158,6 +167,8 @@ public class HeaderItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     public interface StickyHeaderInterface {
+
+
 
         /**
          * This method gets called by {@link HeaderItemDecoration} to fetch the position of the header item in the adapter

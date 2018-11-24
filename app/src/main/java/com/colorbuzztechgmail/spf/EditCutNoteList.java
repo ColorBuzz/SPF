@@ -7,8 +7,11 @@ import android.graphics.drawable.Drawable;
 import android.icu.lang.UCharacter;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -558,17 +561,9 @@ public class EditCutNoteList extends BaseAddEditPopUp  implements View.OnClickLi
 
 
 
-                if(model!=null){
 
-                    removeTable();
-                    mObservableMap.put(MODEL_NAME,null);
-                    mObservableMap.put(MODEL_IN,false);
-
-
-
-                }else {
                     getModel();
-                }
+
                 break;
 
 
@@ -1065,39 +1060,74 @@ public class EditCutNoteList extends BaseAddEditPopUp  implements View.OnClickLi
     private void getModel() {
 
 
+
+
         if(db.getModelsCount()>0){
 
-            if(modelCount<db.getModelsCount()) {
-                modelCount++;
-                model = db.getPreviewModelById(modelCount);
-
-                mObservableMap.put(MODEL_NAME,model.getName());
-                mObservableMap.put(MODEL_IN,true);
-
-                //((TextView) findViewById(R.id.text)).setCompoundDrawablesRelativeWithIntrinsicBounds(getContext().getDrawable(R.drawable.ic_close_black_24dp), null, null, null);
-                switch (mType){
-
-                    case MULTI:
 
 
-                        setupRecycler(getView());
+                final QuerySearchDialogFragment fr= QuerySearchDialogFragment.newInstance(BaseFragment.FragmentType.MODEL,null);
 
 
-                        break;
+                fr.setListener(new ItemActionListener() {
+                    @Override
+                    public void onPreview(Object obj) {
+                        if(model!=null){
+                            removeTable();
+
+                        }
+                        model=(PreviewModelInfo)obj;
+                        mObservableMap.put(MODEL_NAME,model.getName());
+                        mObservableMap.put(MODEL_IN,true);
+
+                        new Handler().post(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                switch (mType){
+
+                                    case MULTI:
+
+
+                                        setupRecycler(getView());
+
+
+                                        break;
 
 
 
-                    case AUTOMATIC:
+                                    case AUTOMATIC:
 
-                        BuildTable(model.getSizeList());
+                                        BuildTable(model.getSizeList());
 
-                        break;
+                                        break;
 
-                }
-            }else{
+                                }
+                            }
+                        });
 
-                modelCount=1;
-            }
+                        //((TextView) findViewById(R.id.text)).setCompoundDrawablesRelativeWithIntrinsicBounds(getContext().getDrawable(R.drawable.ic_close_black_24dp), null, null, null);
+
+                        fr.dismiss();
+                    }
+
+                    @Override
+                    public void toRemove(Object obj) {
+
+                    }
+
+                    @Override
+                    public void toEdit(long[] position) {
+
+                    }
+
+                    @Override
+                    public void onClick(View v, int position, boolean isLongClick) {
+
+                    }
+                });
+
+                fr.show(getFragmentManager(),"search_model");
 
 
         }
@@ -1393,6 +1423,7 @@ public class EditCutNoteList extends BaseAddEditPopUp  implements View.OnClickLi
         }
 
     }
+
 
 
 }

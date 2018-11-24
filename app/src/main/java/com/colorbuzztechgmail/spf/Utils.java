@@ -120,16 +120,6 @@ public class Utils implements Cloneable{
         }
     }
 
-    public static enum ViewMode{
-
-        LIST,
-        GRID
-
-
-    }
-
-    //----------------Pop Up Widnows--------------------------------------///////
-
     public static void showInfoPopUp(final Context context, final Object obj){
 
 
@@ -148,16 +138,16 @@ public class Utils implements Cloneable{
         if(obj instanceof Piece){
             mode=MaterialinfoContainer.MODE_SUBMENU_PIECE;
         }else if (obj instanceof Material) {
-        mode=MaterialinfoContainer.MODE_MATERIAL;
+            mode=MaterialinfoContainer.MODE_MATERIAL;
         }else if (obj instanceof CutNote) {
-        mode=MaterialinfoContainer.MODE_CUTNOTE;
+            mode=MaterialinfoContainer.MODE_CUTNOTE;
         }
         final MaterialinfoContainer infoContainer= new MaterialinfoContainer(context,mode);
 
 
-       final ImageView imageBar=(ImageView) v.findViewById(R.id.app_bar_image);
+        final ImageView imageBar=(ImageView) v.findViewById(R.id.app_bar_image);
         final Toolbar toolbar=(Toolbar) v.findViewById(R.id.appbar2);
-         final AppBarLayout appBarLayout=(AppBarLayout)v.findViewById(R.id.appbar);
+        final AppBarLayout appBarLayout=(AppBarLayout)v.findViewById(R.id.appbar);
 
 
         View closeButton=li.inflate(R.layout.button_layout,null);
@@ -229,12 +219,14 @@ public class Utils implements Cloneable{
 
     }
 
+    //----------------Pop Up Widnows--------------------------------------///////
+
     public static void showPieceList(AppCompatActivity activity,Object obj){
         PieceListPopUp pieceListPopUp;
         if(obj instanceof Piece){
 
-          pieceListPopUp = PieceListPopUp.newInstance(String.valueOf(((Piece)obj).getId()),PieceListAdapter.MODE_SIZE,((Piece)obj).getModelId(),null );
-          pieceListPopUp.show(  activity.getSupportFragmentManager(),"pieceListDialog");
+            pieceListPopUp = PieceListPopUp.newInstance(String.valueOf(((Piece)obj).getId()),PieceListAdapter.MODE_SIZE,((Piece)obj).getModelId(),null );
+            pieceListPopUp.show(  activity.getSupportFragmentManager(),"pieceListDialog");
 
         }else if (obj instanceof Material){
 
@@ -264,32 +256,66 @@ public class Utils implements Cloneable{
 
     public static void showPreview(AppCompatActivity activity,Object obj){
 
-           if(obj instanceof Piece){
+        if(obj instanceof Piece){
 
-               PiecePreviewPopUp piecePopUp = PiecePreviewPopUp.newInstance(((Piece)obj).getModelId(), ((Piece)obj).getId());
+            PiecePreviewPopUp piecePopUp = PiecePreviewPopUp.newInstance(((Piece)obj).getModelId(), ((Piece)obj).getId());
 
-               piecePopUp.show(activity.getSupportFragmentManager(), "piecePopUp");
+            piecePopUp.show(activity.getSupportFragmentManager(), "piecePopUp");
 
-           }else if(obj instanceof Material){
+        }else if(obj instanceof Material){
 
-               byte[] image=ModelDataBase.imageViewtoByte(((Material)obj).getImage());
+            byte[] image=ModelDataBase.imageViewtoByte(((Material)obj).getImage());
 
-               PreviewPopUp materialPopUp= new PreviewPopUp(activity,null,obj);
+            PreviewPopUp materialPopUp= new PreviewPopUp(activity,null,obj);
 
-               materialPopUp.setOwnerActivity(activity);
-               materialPopUp.show();
-           }
+            materialPopUp.setOwnerActivity(activity);
+            materialPopUp.show();
+        }
 
     }
 
-    public static void showMaterialAssigment(AppCompatActivity activity,Material material,onSavedInterface savedInterface){
+    public static void showMaterialAssigment(final AppCompatActivity activity, final Material material, final onSavedInterface savedInterface){
+
+       final QuerySearchDialogFragment fr= QuerySearchDialogFragment.newInstance(BaseFragment.FragmentType.MATERIAL,null);
+       fr.setListener( new ItemActionListener() {
+           @Override
+           public void onPreview(Object obj) {
+
+
+               ModelDataBase db= new ModelDataBase(activity);
+               db.updateMaterial(material.getModelId(),material.getId(),null, ((CustomMaterial)obj).getId());
 
 
 
-       final MaterialAsigmentoPopUp poupMaterialAsigment=  MaterialAsigmentoPopUp.newInstance(material.getModelId(),material.getId(),material.getName());
-        poupMaterialAsigment.setSavedInterface(savedInterface);
+               Material newMaterial= db.getMaterialById(material.getModelId(),material.getId());
+               newMaterial.setImage(((CustomMaterial)obj).getImage());
 
-        poupMaterialAsigment.show( activity.getSupportFragmentManager(),"materialAssigment");
+               savedInterface.onSaved(newMaterial,0,true);
+
+               fr.dismiss();
+
+           }
+
+           @Override
+           public void toRemove(Object obj) {
+
+           }
+
+           @Override
+           public void toEdit(long[] position) {
+
+           }
+
+           @Override
+           public void onClick(View v, int position, boolean isLongClick) {
+
+           }
+       });
+
+        fr.show(activity.getSupportFragmentManager(),"search_custom_material");
+
+
+
     }
 
     public static void deleteAssignedMaterial(Context context,Material material){
@@ -297,20 +323,8 @@ public class Utils implements Cloneable{
         ModelDataBase db= new ModelDataBase(context);
         material.setCustomMaterialId(0);
         material.setImage(new ColorDrawable(Color.TRANSPARENT));
-         db.updateMaterial(material.getModelId(),material.getId(),null,0);
+        db.updateMaterial(material.getModelId(),material.getId(),null,0);
     }
-
-    public interface onSavedInterface{
-
-
-        void onSaved(Object obj,int position,boolean isEditable);
-
-    }
-
-
-
-
-    ///---------------- Data Utils--------------------////////////
 
     public static String objectToJson(Object values){
 
@@ -327,6 +341,11 @@ public class Utils implements Cloneable{
 
         return gson.fromJson(json,Object.class);
     }
+
+
+
+
+    ///---------------- Data Utils--------------------////////////
 
     public static byte[] prepareObjectToByte(Object object) {
 
@@ -359,22 +378,22 @@ public class Utils implements Cloneable{
 
     public static void sendImage(Context context,Object obj){
 
-       Object[] arrayObjs= new Object[2];
+        Object[] arrayObjs= new Object[2];
 
-       if(obj instanceof Piece){
+        if(obj instanceof Piece){
 
-           arrayObjs[0]=  ShapeGenerator.DrawableToBitmap(((Piece)obj).getImage());
-           arrayObjs[1]=((Piece)obj).getName()+ "_"+((Piece)obj).getSize()+"_"+((Piece)obj).getMaterial();
-
-
-       }else  if(obj instanceof CustomMaterial){
+            arrayObjs[0]=  ShapeGenerator.DrawableToBitmap(((Piece)obj).getImage());
+            arrayObjs[1]=((Piece)obj).getName()+ "_"+((Piece)obj).getSize()+"_"+((Piece)obj).getMaterial();
 
 
-           arrayObjs[0]=ShapeGenerator.DrawableToBitmap(((CustomMaterial)obj).getImage());
-           arrayObjs[1]=((CustomMaterial)obj).getName()+ "_"+((CustomMaterial)obj).getDealership()+"_"+String.valueOf(((CustomMaterial)obj).getSeasons());
+        }else  if(obj instanceof CustomMaterial){
 
 
-       }
+            arrayObjs[0]=ShapeGenerator.DrawableToBitmap(((CustomMaterial)obj).getImage());
+            arrayObjs[1]=((CustomMaterial)obj).getName()+ "_"+((CustomMaterial)obj).getDealership()+"_"+String.valueOf(((CustomMaterial)obj).getSeasons());
+
+
+        }
 
 
 
@@ -387,60 +406,6 @@ public class Utils implements Cloneable{
 
     }
 
-    private static class saveBitmapToDisk extends AsyncTask<Object,Void, File> {
-        Boolean toShare;
-        private Context context ;
-
-        public void setContext(Context context) {
-            this.context = context;
-        }
-
-        public saveBitmapToDisk(Context context, Object objs) {
-            this.context = context;
-            execute(objs);
-        }
-
-        @Override
-        protected File doInBackground(Object[] objs) {
-            try {
-                File file = new File(context.getExternalFilesDir(null), objs[1]+".png");
-                if(file.exists()){
-
-                    file.delete();
-                }
-                FileOutputStream fOut = new FileOutputStream(file);
-
-
-                Bitmap saveBitmap =(Bitmap)objs[0];
-                saveBitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
-                fOut.flush();
-                fOut.close();
-                return file;
-            } catch (OutOfMemoryError e) {
-                Log.e("MainActivity", "Out of Memory saving bitmap; bitmap is too large");
-                return null;
-            } catch (Exception e) {
-                Log.e("MainActivity", e.getMessage());
-                return null;
-            }
-
-        }
-
-        @Override
-        protected void onPostExecute(File file) {
-            final Intent shareIntent = new Intent(Intent.ACTION_SEND);
-
-            shareIntent.setType("oldImage/png");
-
-
-
-            shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
-
-            context.startActivity(Intent.createChooser(shareIntent, ""));
-
-        }
-    }
-
     public static void addImageToGallery(final String filePath, final Context context) {
 
         ContentValues values = new ContentValues();
@@ -451,8 +416,6 @@ public class Utils implements Cloneable{
 
         context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
     }
-
-    ///------------- Conversion Data Utils--------------///////////
 
     public static float FormatDecimal (float value){
 
@@ -518,6 +481,8 @@ public class Utils implements Cloneable{
 
     }
 
+    ///------------- Conversion Data Utils--------------///////////
+
     public static CutNote.cutNoteStatus convertStringToStatus(Context mContext, String value){
 
 
@@ -575,10 +540,6 @@ public class Utils implements Cloneable{
         return new Float(formatter.format(area));
     }
 
-    ///----------------- Generator Data Utils--------///////////
-
-
-
     public static String getDate(){
         SimpleDateFormat dateFormat= new SimpleDateFormat("dd/MM/yyyy\nHH:mm:ss");
         Date auxdate = new Date();
@@ -603,22 +564,7 @@ public class Utils implements Cloneable{
 
     }
 
-    public static class IdMaker {
-        static final AtomicInteger atomicInteger = new AtomicInteger();
-
-
-        public  static boolean reset(){
-
-            atomicInteger.set(0);
-            return true;
-
-        }
-
-
-        public static int next() {
-            return atomicInteger.incrementAndGet();
-        }
-    }
+    ///----------------- Generator Data Utils--------///////////
 
     public static Drawable getImageAtStatus (Context context,CutNote.cutNoteStatus status ) {
 
@@ -644,16 +590,102 @@ public class Utils implements Cloneable{
 
         }
 
-      return (ShapeGenerator.getShape(context,ShapeGenerator.MODE_ROUND_RECT,(int)context.getResources().getDimension(R.dimen.profile_pic_small_size),(int)context.getResources().getDimension(R.dimen.profile_pic_small_size),color));
+        return (ShapeGenerator.getShape(context,ShapeGenerator.MODE_ROUND_RECT,(int)context.getResources().getDimension(R.dimen.profile_pic_small_size),(int)context.getResources().getDimension(R.dimen.profile_pic_small_size),color));
 
 
     }
 
     public static void imagePicker(Activity activity, int RequestCode){
 
-         Intent chooseImageIntent = ImagePicker.getPickImageIntent(activity);
+        Intent chooseImageIntent = ImagePicker.getPickImageIntent(activity);
         activity.startActivityForResult(chooseImageIntent,RequestCode);
 
+    }
+
+    public static enum ViewMode{
+
+        LIST,
+        GRID
+
+
+    }
+
+    public interface onSavedInterface{
+
+
+        void onSaved(Object obj,int position,boolean isEditable);
+
+    }
+
+    private static class saveBitmapToDisk extends AsyncTask<Object,Void, File> {
+        Boolean toShare;
+        private Context context ;
+
+        public saveBitmapToDisk(Context context, Object objs) {
+            this.context = context;
+            execute(objs);
+        }
+
+        public void setContext(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        protected File doInBackground(Object[] objs) {
+            try {
+                File file = new File(context.getExternalFilesDir(null), objs[1]+".png");
+                if(file.exists()){
+
+                    file.delete();
+                }
+                FileOutputStream fOut = new FileOutputStream(file);
+
+
+                Bitmap saveBitmap =(Bitmap)objs[0];
+                saveBitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+                fOut.flush();
+                fOut.close();
+                return file;
+            } catch (OutOfMemoryError e) {
+                Log.e("MainActivity", "Out of Memory saving bitmap; bitmap is too large");
+                return null;
+            } catch (Exception e) {
+                Log.e("MainActivity", e.getMessage());
+                return null;
+            }
+
+        }
+
+        @Override
+        protected void onPostExecute(File file) {
+            final Intent shareIntent = new Intent(Intent.ACTION_SEND);
+
+            shareIntent.setType("oldImage/png");
+
+
+
+            shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+
+            context.startActivity(Intent.createChooser(shareIntent, ""));
+
+        }
+    }
+
+    public static class IdMaker {
+        static final AtomicInteger atomicInteger = new AtomicInteger();
+
+
+        public  static boolean reset(){
+
+            atomicInteger.set(0);
+            return true;
+
+        }
+
+
+        public static int next() {
+            return atomicInteger.incrementAndGet();
+        }
     }
 
 }

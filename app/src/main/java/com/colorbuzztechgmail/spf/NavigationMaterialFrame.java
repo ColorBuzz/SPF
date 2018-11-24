@@ -64,7 +64,7 @@ public class NavigationMaterialFrame extends NavigationBaseFrame {
 
             case R.id.action_search:
             getChildFragmentManager().beginTransaction()
-                    .replace(R.id.container,QuerySearchFragment.newInstance(BaseFragment.FragmentType.MATERIAL.name(), null))
+                    .replace(R.id.container,QuerySearchFragment.newInstance(BaseFragment.FragmentType.MATERIAL.name(), null,null))
                     .setTransition(FragmentTransaction.TRANSIT_ENTER_MASK)
                     .addToBackStack(null)
                     .commit();

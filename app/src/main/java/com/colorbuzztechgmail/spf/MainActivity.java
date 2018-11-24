@@ -214,13 +214,13 @@ MenuItem searchItem;
 
             case R.id.action_material_gen:
 
-                CustomMaterialGenerator.create(20,this);
+                CustomMaterialGenerator.create(1000,this);
 
                 return true;
 
 
             case R.id.action_cutnoteList_gen:
-                CutNoteListGenerator.create(1000,this,10);
+                CutNoteListGenerator.create(10,this,10);
 
 
                 return true;

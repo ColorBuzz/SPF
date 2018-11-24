@@ -66,15 +66,16 @@ import static com.colorbuzztechgmail.spf.ModelDataBase.TABLE_MODEL_CUSTUMER_RELA
 import static com.colorbuzztechgmail.spf.ModelDataBase.TABLE_MODEL_DIRECTORY_RELATIONS;
 
 
-public class QuerySearchFragment extends Fragment implements ItemActionListener,SearchView.OnQueryTextListener {
+public class QuerySearchFragment extends Fragment implements SearchView.OnQueryTextListener {
 
-    public static QuerySearchFragment newInstance(String fragmentType,String tag){
+    public static QuerySearchFragment newInstance(String fragmentType,String tag,@Nullable ItemActionListener listener){
 
         Bundle args = new Bundle();
 
 
 
         QuerySearchFragment c = new QuerySearchFragment();
+        c.setItemActionClickListener(listener);
         args.putString(FRAGMENT_TYPE,fragmentType);
         args.getString(TAG,tag);
          c.setArguments(args);
@@ -90,7 +91,7 @@ public class QuerySearchFragment extends Fragment implements ItemActionListener,
     private RecentListAdapter adapter;
     private ModelDataBase db;
     public Cursor mCursor;
-    private int maxItems = 10;
+    private int maxItems = 50;
     private int cursorPos=0;
     private boolean isMoreLoading = true;
     private MoveCursorAsyncTask moveCursorAsyncTask;
@@ -99,6 +100,8 @@ public class QuerySearchFragment extends Fragment implements ItemActionListener,
     private String myTag="";
     public BaseFragment.FragmentType frType;
     public ObservableArrayMap<Integer,Object> mValuesMap;
+    private waitScreen waitScreen;
+    private ItemActionListener listener;
 
 
     public static String TAG="tag";
@@ -106,6 +109,11 @@ public class QuerySearchFragment extends Fragment implements ItemActionListener,
 
     public static final int ITEMS_COUNT=1;
 
+    public void setItemActionClickListener(ItemActionListener  listener){
+
+        this.listener=listener;
+
+    }
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -163,6 +171,8 @@ public class QuerySearchFragment extends Fragment implements ItemActionListener,
 
         mValuesMap.put(ITEMS_COUNT,0);
 
+        maxItems=(int)getResources().getInteger(R.integer.maxItemLoad);
+
 
 
 
@@ -202,9 +212,10 @@ public class QuerySearchFragment extends Fragment implements ItemActionListener,
         setMyTag(getString(R.string.action_search));
 
         db=new ModelDataBase(getContext());
-        adapter=new RecentListAdapter(this,(AppCompatActivity) getActivity(),true);
+        adapter=new RecentListAdapter(listener,(AppCompatActivity) getActivity(),false);
         this.dataset=new RecentDataset(mRecycler,adapter);
         adapter.dataset=dataset;
+        waitScreen=new waitScreen("",1000);
 
         //loadSearchBar();
         refreshInfobar(getMyTag());
@@ -261,6 +272,7 @@ public class QuerySearchFragment extends Fragment implements ItemActionListener,
     }
 
     public void fillDataset(List<Object> items) {
+        cursorPos=cursorPos+items.size();
 
         if (!items.isEmpty()) {
 
@@ -281,26 +293,6 @@ public class QuerySearchFragment extends Fragment implements ItemActionListener,
             }
 
         }
-
-    }
-
-    @Override
-    public void onPreview(Object obj) {
-
-    }
-
-    @Override
-    public void toRemove(Object obj) {
-
-    }
-
-    @Override
-    public void toEdit(long[] position) {
-
-    }
-
-    @Override
-    public void onClick(View v, int position, boolean isLongClick) {
 
     }
 
@@ -326,7 +318,10 @@ public class QuerySearchFragment extends Fragment implements ItemActionListener,
         }
         if(query.trim().length()==0){
 
+            if(dataset!=null){
+                dataset.removeAll();
 
+            }
             return false;
         }
 
@@ -339,10 +334,19 @@ public class QuerySearchFragment extends Fragment implements ItemActionListener,
                 querySeachAsyncTask=new QuerySeachAsyncTask(getContext(),value,getFrType(),mCursor){
 
                     @Override
+                    protected void onPreExecute() {
+                        dataset.removeAll();
+
+                        waitScreen=new waitScreen("",1000);
+                        waitScreen.setVisible(true);
+                        dataset.add(waitScreen);
+
+                    }
+
+                    @Override
                     protected void onPostExecute(Cursor cursor) {
                         cursorPos=0;
-                        dataset.removeAll();
-                        dismissQuerySearch();
+
 
                         newMoveCursorAsyncTask(cursor);
 
@@ -390,6 +394,11 @@ public class QuerySearchFragment extends Fragment implements ItemActionListener,
 
     public void dismissQuerySearch() {
 
+        if (dataset.size() > 0 && waitScreen.isVisible()) {
+            dataset.removeIndex(dataset.size() - 1);
+            waitScreen.setVisible(false);
+
+        }
     }
 
     public void dismissLoading() {
@@ -452,7 +461,9 @@ public class QuerySearchFragment extends Fragment implements ItemActionListener,
 
                 @Override
                 protected void onPostExecute(List<Object> items) {
-                    cursorPos=cursorPos+items.size();
+                    if(waitScreen.isVisible()){
+                        dismissQuerySearch();
+                    }
                     dismissLoading();
                     setMore(true);
                     fillDataset(items);
@@ -525,8 +536,6 @@ public class QuerySearchFragment extends Fragment implements ItemActionListener,
 
         }
 
-
-
         @Override
         protected Cursor doInBackground(Object [] params) {
 
@@ -543,20 +552,6 @@ public class QuerySearchFragment extends Fragment implements ItemActionListener,
 
 
                     selectQuery ="SELECT * FROM " + TABLE_MODEL +" WHERE " + KEY_ID +" IN " + "(SELECT docid FROM " + FTS_MODEL + " WHERE " + FTS_MODEL + " MATCH ?) ORDER BY " + COLUMN_ORDER+";";
-
-              /*  selectQuery = "SELECT  * FROM " + TABLE_MODEL + " m, " + TABLE_CUSTUMER + " c, "
-                        + TABLE_DIRECTORY + " d, " + TABLE_MODEL_DIRECTORY_RELATIONS + " tdm, "
-                        + TABLE_MODEL_CUSTUMER_RELATIONS +" tcm"
-                        + " WHERE d." + KEY_ID + " = " + "tdm." + KEY_DIRECTORY_ID
-                        + " AND m." + KEY_ID + " = " + "tdm." + KEY_MODEL_ID
-                        + " AND tcm." + KEY_CUSTUMER_ID + " = c." + KEY_ID
-                        + " AND tcm." + KEY_MODEL_ID + " = m." + KEY_ID
-                        + " OR d." + DIRECTORY_COLUMN_NAME +  " LIKE " +"'" + query + "'"
-                        + " OR c." + CUSTUMER_COLUMN_NAME  + " LIKE " + "'" + query + "'"
-                        + " OR m." + MODEL_COLUMN_NAME  +  " LIKE " + "'" + query + "';";*/
-
-
-
 
                     break;
 
@@ -638,31 +633,34 @@ public class QuerySearchFragment extends Fragment implements ItemActionListener,
             int millis= start==0 ? 0:1500;
             boolean notNull=false;
 
-            if(mCursor!=null) {
-                while ((count < maxItemLoad) && (mCursor.moveToNext())) {
 
-
-                    if (mCursor.getPosition() < mCursor.getCount()) {
-                        list.add(getObjectListener.getObject( mCursor));
-                        cursorPos++;
-                        count++;
-                    }
-
-                }
-
-                if(cursorPos>0) {
-                    if (cursorPos == mCursor.getCount()) {
-
-                        mCursor.close();
-
-                    }
-                }
                 try {
-                    Thread.sleep(1500);
+
+                    if(mCursor!=null) {
+                        while ((count < maxItemLoad) && (mCursor.moveToNext())) {
+
+
+                            if (mCursor.getPosition() < mCursor.getCount()) {
+                                list.add(getObjectListener.getObject(mCursor));
+                                cursorPos++;
+                                count++;
+                            }
+
+                        }
+
+                        if (cursorPos > 0) {
+                            if (cursorPos == mCursor.getCount()) {
+
+                                mCursor.close();
+
+                            }
+                        }
+                    }
+                    Thread.sleep(millis);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }
+
 
             /////////////////////////////////////////////////
 
@@ -686,6 +684,29 @@ public class QuerySearchFragment extends Fragment implements ItemActionListener,
 
     }
 
+    public class waitScreen extends ProgressItem{
+
+        boolean visible=false;
+
+
+        public waitScreen(String tag, long id) {
+            super(tag, id);
+        }
+
+        public boolean isVisible() {
+            return visible;
+        }
+
+        public void setVisible(boolean visible) {
+            this.visible = visible;
+        }
+
+        @Override
+        public void setTAG(String TAG) {
+
+            super.setTAG(TAG);
+        }
+    }
 
 
 }

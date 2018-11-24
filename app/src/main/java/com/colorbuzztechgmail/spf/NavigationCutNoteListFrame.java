@@ -50,7 +50,7 @@ public class NavigationCutNoteListFrame extends NavigationBaseFrame implements C
 
             case R.id.action_search:
                 getChildFragmentManager().beginTransaction()
-                        .replace(R.id.container,QuerySearchFragment.newInstance(BaseFragment.FragmentType.CUTNOTE.name(), null))
+                        .replace(R.id.container,QuerySearchFragment.newInstance(BaseFragment.FragmentType.CUTNOTE.name(), null,null))
                         .setTransition(FragmentTransaction.TRANSIT_ENTER_MASK)
                         .addToBackStack(null)
                         .commit();

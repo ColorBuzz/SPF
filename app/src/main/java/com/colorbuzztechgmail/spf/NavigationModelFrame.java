@@ -78,7 +78,7 @@ public class NavigationModelFrame extends NavigationBaseFrame  implements TabSea
 
             case R.id.action_search:
                 getChildFragmentManager().beginTransaction()
-                        .replace(R.id.container,QuerySearchFragment.newInstance(BaseFragment.FragmentType.MODEL.name(), null))
+                        .replace(R.id.container,QuerySearchFragment.newInstance(BaseFragment.FragmentType.MODEL.name(), null,null))
                         .setTransition(FragmentTransaction.TRANSIT_ENTER_MASK)
                         .addToBackStack(null)
                         .commit();

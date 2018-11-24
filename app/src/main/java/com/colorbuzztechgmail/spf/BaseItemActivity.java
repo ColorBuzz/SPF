@@ -178,6 +178,7 @@ public abstract class BaseItemActivity extends AppCompatActivity implements Sear
             }
         });
         db=new ModelDataBase(this);
+        maxItems=(int)getResources().getInteger(R.integer.maxItemLoad);
 
 
         setupRecycler();
@@ -477,7 +478,7 @@ public abstract class BaseItemActivity extends AppCompatActivity implements Sear
 
 
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame,QuerySearchFragment.newInstance(BaseFragment.FragmentType.MODEL.name(), null))
+                        .replace(R.id.frame,QuerySearchFragment.newInstance(BaseFragment.FragmentType.MODEL.name(), null,null))
                         .setTransition(FragmentTransaction.TRANSIT_ENTER_MASK)
                         .addToBackStack(null)
                         .commit();
@@ -490,7 +491,7 @@ public abstract class BaseItemActivity extends AppCompatActivity implements Sear
 
 
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame,QuerySearchFragment.newInstance(BaseFragment.FragmentType.MATERIAL.name(), null))
+                        .replace(R.id.frame,QuerySearchFragment.newInstance(BaseFragment.FragmentType.MATERIAL.name(), null,null))
                         .setTransition(FragmentTransaction.TRANSIT_ENTER_MASK)
                         .addToBackStack(null)
                         .commit();
@@ -503,7 +504,7 @@ public abstract class BaseItemActivity extends AppCompatActivity implements Sear
 
 
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame,QuerySearchFragment.newInstance(BaseFragment.FragmentType.CUTNOTE.name(), null))
+                        .replace(R.id.frame,QuerySearchFragment.newInstance(BaseFragment.FragmentType.CUTNOTE.name(), null,null))
                         .setTransition(FragmentTransaction.TRANSIT_ENTER_MASK)
                         .addToBackStack(null)
                         .commit();

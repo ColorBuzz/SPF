@@ -152,7 +152,7 @@ public class CutNotesListItemActivity extends BaseItemActivity  {
 
             case CUTNOTE_STATUS:
                 selectQuery = "SELECT  * FROM " + TABLE_CUNOTE_LIST + " tcl "+
-                        " WHERE tcl." + CUTNOTE_COLUMN_STATUS + " = '" + Utils.convertStringToStatus(this,query).name() +"'";
+                        " WHERE tcl." + CUTNOTE_COLUMN_STATUS + " = '" + query +"'";
                 break;
 
 
