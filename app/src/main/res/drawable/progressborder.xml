@@ -1,0 +1,18 @@
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="1325dp"
+    android:height="1438dp"
+    android:viewportWidth="1325"
+    android:viewportHeight="1438">
+
+
+    <path
+            android:name="path_progress"
+            android:pathData="M 9.998 1073.998 L 9.998 365.998 C 9.998 169.998 168.998 9.998 364.998 9.998 L 959.998 9.998 C 1155.998 9.998 1315.998 169.998 1315.998 365.998 L 1315.998 1073.998 C 1315.998 1269.998 1155.998 1428.998 959.998 1428.998 L 364.998 1428.998 C 168.998 1428.998 9.998 1269.998 9.998 1073.998 Z"
+            android:strokeColor="#1f1b20"
+            android:strokeWidth="19.99629974"
+            android:trimPathEnd="1"/>
+
+
+</vector>
+

@@ -1,0 +1,32 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="40dp"
+    android:height="40dp"
+    android:viewportWidth="40"
+    android:viewportHeight="40">
+
+
+    <path
+        android:name="path_progress"
+        android:pathData="M 5 40 h 30"
+
+
+           android:strokeColor="@color/textColorPrimary"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+
+        android:trimPathEnd="1"/>
+
+    <path
+        android:name="path_progress"
+        android:pathData="M 1 40 v -40 h 38 v 40"
+
+
+        android:strokeColor="@color/textColorPrimary"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+
+        android:trimPathEnd="1"/>
+
+</vector>

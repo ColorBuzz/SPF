@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+<!--<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data class="MaterialListBinding">
+        <variable
+            name="obj" type="com.colorbuzztechgmail.spf.Material"
+            />
+    </data>
+
+-->
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardContainer"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="false"
+    android:layout_centerVertical="true"
+    android:animateLayoutChanges="true"
+    android:background="@drawable/bg"
+    android:divider="@drawable/linedrawable"
+    android:dividerPadding="0dp"
+    android:elevation="1dp"
+    android:orientation="vertical"
+    android:showDividers="none">
+
+
+        <LinearLayout
+            android:id="@+id/animlayout"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+
+
+            android:layout_margin="0dp"
+            android:animateLayoutChanges="true"
+            android:background="@drawable/drawable_transparent"
+            android:clickable="true"
+            android:clipToPadding="false"
+            android:divider="@drawable/linedrawable"
+            android:dividerPadding="0dp"
+            android:orientation="vertical">
+
+
+            <com.colorbuzztechgmail.spf.CheckableLinearLayout
+                android:id="@+id/checkLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/checkedlayout"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.4">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <ImageView
+                            android:id="@+id/imageViewProfile"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_weight="0.2"
+                            app:srcCompat="@drawable/ic_leather_grey" />
+
+                        <TextView
+                            android:id="@+id/titleTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.8"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+
+                            android:gravity="center_vertical"
+                            android:nestedScrollingEnabled="true"
+                            android:scrollIndicators="left"
+                            android:text="@{obj.name}"
+                            android:textColor="@color/textColorPrimary" />
+                    </LinearLayout>
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.4">
+
+                    <TextView
+                        android:id="@+id/subtitleTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingLeft="16dp"
+                        android:text="@{obj.date}"
+                        android:textColor="@color/textColorSecondary" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/toggleFrame"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_weight="0.2"
+                    android:visibility="visible">
+
+
+                    <ImageView
+                        android:id="@+id/toggleBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center_vertical"
+                        android:clickable="false"
+                        android:focusableInTouchMode="false"
+                        android:paddingRight="8dp"
+                        android:src="@drawable/ic_keyboard_arrow_down_grey_animatable_clockwise"
+                        android:visibility="visible" />
+                </FrameLayout>
+
+            </com.colorbuzztechgmail.spf.CheckableLinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:showDividers="beginning">
+
+            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                android:id="@+id/expandableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center"
+                android:gravity="center"
+                app:ael_duration="50"
+                app:ael_expanded="false"
+                app:ael_interpolator="linear"
+                app:ael_orientation="vertical">
+
+
+                <FrameLayout
+                    android:id="@+id/frameExpand"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <include
+                        android:id="@+id/infoContainer"
+                        layout="@layout/animated_info_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </FrameLayout>
+            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+<!--</layout>-->

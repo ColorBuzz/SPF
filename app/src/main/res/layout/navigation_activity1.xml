@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.colorbuzztechgmail.spf.MainActivity">
+
+    <android.support.design.widget.CoordinatorLayout
+
+        android:id="@+id/parentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="10"
+        android:fitsSystemWindows="true"
+        android:layout_above="@+id/bottomNavigation">
+
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/iconsColor"
+            android:visibility="visible">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="0dp"
+
+                android:theme="@style/AppBarThemeLight"
+                app:contentScrim="@color/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|enterAlways"
+                app:layout_scrollInterpolator="@android:anim/linear_interpolator"
+                app:titleTextColor="@color/iconsColor"
+                app:toolbarId="@+id/mainToolbar">
+
+                <ImageView
+                    android:id="@+id/app_bar_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
+
+                <include
+
+                    android:id="@+id/appbarContainer"
+                    layout="@layout/appbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nestedview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+            <com.colorbuzztechgmail.spf.MovableLayout
+                android:id="@+id/movable"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <FrameLayout
+                    android:id="@+id/frame"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <android.support.v7.widget.GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="14dp"
+                        app:alignmentMode="alignMargins"
+                        app:columnCount="2"
+                        app:columnOrderPreserved="false"
+                        app:rowCount="4">
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card_recent"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:clickable="true"
+                            android:onClick="onClick"
+                            app:cardBackgroundColor="@color/iconsColor"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="8dp"
+                            app:cardUseCompatPadding="true"
+                            app:layout_columnWeight="1"
+                            app:layout_rowWeight="1">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical|center_horizontal"
+                                android:layout_margin="0dp"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+
+                                <ImageView
+                                    android:id="@+id/imageView10"
+                                    android:layout_width="@dimen/piece_pic_detail_size"
+                                    android:layout_height="@dimen/piece_pic_detail_size"
+                                    android:layout_gravity="center_horizontal"
+                                    app:srcCompat="@drawable/ic_acces_selector" />
+
+                                <TextView
+                                    android:id="@+id/textView8"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/importRecent_Cat"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/textColorPrimary"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card_model"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:onClick="onClick"
+                            app:cardBackgroundColor="@color/iconsColor"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="8dp"
+                            app:cardUseCompatPadding="true"
+                            app:layout_columnWeight="1"
+                            app:layout_rowWeight="1">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical|center_horizontal"
+                                android:layout_margin="0dp"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+
+                                <ImageView
+                                    android:id="@+id/imageView10"
+                                    android:layout_width="@dimen/piece_pic_detail_size"
+                                    android:layout_height="@dimen/piece_pic_detail_size"
+                                    android:layout_gravity="center_horizontal"
+                                    app:srcCompat="@drawable/ic_shoe_selector" />
+
+                                <TextView
+                                    android:id="@+id/textView8"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/model_btn"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/textColorPrimary"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card_material"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:onClick="onClick"
+                            app:cardBackgroundColor="@color/iconsColor"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="8dp"
+                            app:cardUseCompatPadding="true"
+                            app:layout_columnWeight="1"
+                            app:layout_rowWeight="1">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical|center_horizontal"
+                                android:layout_margin="0dp"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+
+                                <ImageView
+                                    android:id="@+id/imageView10"
+                                    android:layout_width="@dimen/piece_pic_detail_size"
+                                    android:layout_height="@dimen/piece_pic_detail_size"
+                                    android:layout_gravity="center_horizontal"
+                                    app:srcCompat="@drawable/ic_leather_selector" />
+
+                                <TextView
+                                    android:id="@+id/textView8"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/materialsTxt"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/textColorPrimary"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card_list"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:onClick="onClick"
+                            app:cardBackgroundColor="@color/iconsColor"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="8dp"
+                            app:cardUseCompatPadding="true"
+                            app:layout_columnWeight="1"
+                            app:layout_rowWeight="1">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical|center_horizontal"
+                                android:layout_margin="0dp"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+
+                                <ImageView
+                                    android:id="@+id/imageView10"
+                                    android:layout_width="@dimen/piece_pic_detail_size"
+                                    android:layout_height="@dimen/piece_pic_detail_size"
+                                    android:layout_gravity="center_horizontal"
+                                    app:srcCompat="@drawable/ic_assignment_selector" />
+
+                                <TextView
+                                    android:id="@+id/textView8"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/cutNotesLists"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/textColorPrimary"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card_dealer"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:onClick="onClick"
+                            app:cardBackgroundColor="@color/iconsColor"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="8dp"
+                            app:cardUseCompatPadding="true"
+                            app:layout_columnWeight="1"
+                            app:layout_rowWeight="1">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical|center_horizontal"
+                                android:layout_margin="0dp"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+
+                                <ImageView
+                                    android:id="@+id/imageView10"
+                                    android:layout_width="@dimen/piece_pic_detail_size"
+                                    android:layout_height="@dimen/piece_pic_detail_size"
+                                    android:layout_gravity="center_horizontal"
+                                    app:srcCompat="@drawable/ic_person_selector" />
+
+                                <TextView
+                                    android:id="@+id/textView8"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/dealership_dealerships"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/textColorPrimary"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card_complement"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:onClick="onClick"
+                            app:cardBackgroundColor="@color/iconsColor"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="8dp"
+                            app:cardUseCompatPadding="true"
+                            app:layout_columnWeight="1"
+                            app:layout_rowWeight="1">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical|center_horizontal"
+                                android:layout_margin="0dp"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+
+                                <ImageView
+                                    android:id="@+id/imageView10"
+                                    android:layout_width="@dimen/piece_pic_detail_size"
+                                    android:layout_height="@dimen/piece_pic_detail_size"
+                                    android:layout_gravity="center_horizontal"
+                                    app:srcCompat="@drawable/ic_local_offer_selector" />
+
+                                <TextView
+                                    android:id="@+id/textView8"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/action_complements"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/textColorPrimary"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/card_external"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:onClick="onClick"
+                            app:cardBackgroundColor="@color/iconsColor"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="8dp"
+                            app:cardUseCompatPadding="true"
+                            app:layout_columnWeight="1"
+                            app:layout_rowWeight="1">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical|center_horizontal"
+                                android:layout_margin="0dp"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+
+                                <ImageView
+                                    android:id="@+id/imageView10"
+                                    android:layout_width="@dimen/piece_pic_detail_size"
+                                    android:layout_height="@dimen/piece_pic_detail_size"
+                                    android:layout_gravity="center_horizontal"
+                                    app:srcCompat="@drawable/ic_all_out_selector" />
+
+                                <TextView
+                                    android:id="@+id/textView8"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/externalActivity"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/textColorPrimary"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </android.support.v7.widget.CardView>
+
+
+                    </android.support.v7.widget.GridLayout>
+                </FrameLayout>
+
+            </com.colorbuzztechgmail.spf.MovableLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="bottom|right|end"
+            android:layout_marginBottom="@dimen/actionBarHeight"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:overScrollMode="always"
+            android:visibility="gone"
+            app:backgroundTint="@color/colorAccentLight"
+            app:elevation="16dp"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.693"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.396"
+            app:srcCompat="@drawable/ic_add_plus_white_40dp" />
+
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionBarHeight"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_semi_round"
+        android:theme="@style/BottomNavigationTheme"
+        android:visibility="gone"
+        app:layout_collapseMode="none"
+        >
+
+    </android.support.design.widget.BottomNavigationView>
+
+</RelativeLayout>

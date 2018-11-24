@@ -1,0 +1,38 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.colorbuzztechgmail.spf.ModelActivity">
+
+
+    <item
+        android:id="@+id/action"
+        android:enabled="true"
+        android:icon="@drawable/ic_more_selector"
+        android:orderInCategory="100"
+        android:title="@string/action_edit"
+        android:visible="true"
+        app:showAsAction="ifRoom">
+
+        <menu>
+
+
+            <item
+                android:id="@+id/action_info"
+                android:enabled="true"
+                android:icon="@drawable/ic_info_white_24dp"
+                android:title="@string/piece_Info"
+                android:visible="true" />
+            <item
+                android:id="@+id/action_edit"
+                android:icon="@drawable/ic_mode_edit_white_24dp"
+                android:title="@string/action_edit" />
+            <item
+                android:id="@+id/action_send"
+                android:icon="@drawable/ic_share_white_24dp"
+                android:title="@string/action_send" />
+        </menu>
+
+    </item>
+
+
+</menu>

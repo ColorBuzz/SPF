@@ -1,0 +1,44 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.colorbuzztechgmail.spf.MainActivity" >
+
+
+    <item
+        android:id="@+id/action_sortDealer"
+        android:enabled="true"
+        android:icon="@drawable/ic_leather_grey"
+        android:orderInCategory="100"
+        android:title="Info. Proveedor"
+        android:visible="true">
+
+
+    </item>
+    <item
+        android:id="@+id/action_relations"
+        android:enabled="true"
+        android:icon="@drawable/ic_leather_grey"
+        android:orderInCategory="200"
+        android:title="Relaciones"
+        android:visible="true">
+
+
+    </item>
+
+
+
+    <item
+        android:id="@+id/action_customMaterial"
+        android:enabled="true"
+        android:icon="@drawable/ic_mode_edit_grey_24dp"
+        android:orderInCategory="300"
+        android:title="@string/action_edit"
+        android:visible="true">
+
+    </item>
+
+
+
+
+
+</menu>

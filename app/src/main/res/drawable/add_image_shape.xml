@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:width="@dimen/piece_pic_detail_size"
+        android:height="@dimen/piece_pic_detail_size"
+        android:bottom="8dp"
+        android:top="8dp"
+        android:right="8dp"
+        android:left="8dp"
+
+        android:drawable="@drawable/ic_add_a_photo_grey_24dp" />
+
+
+
+
+
+
+
+</layer-list>

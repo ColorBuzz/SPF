@@ -1,0 +1,58 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.colorbuzztechgmail.spf.MainActivity" >
+
+
+    <item
+        android:id="@+id/action_pieces"
+        android:enabled="true"
+        android:icon="@drawable/ic_piece"
+        android:orderInCategory="100"
+        android:title="@string/action_piecesMaterial"
+        android:visible="true">
+
+
+    </item>
+
+    <item
+        android:id="@+id/action_customMaterial"
+        android:enabled="true"
+        android:icon="@drawable/ic_leather"
+        android:orderInCategory="200"
+        android:title="@string/action_customMaterial"
+        android:visible="true">
+
+    </item>
+
+
+    <item
+        android:enabled="true"
+        android:id="@+id/action_deleteCustomMaterial"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:orderInCategory="300"
+        android:title="@string/action_delete_customMaterial"
+        android:visible="false"
+
+         />
+
+    <item
+        android:id="@+id/action_send"
+        android:enabled="true"
+        android:icon="@drawable/ic_mode_edit_grey_24dp"
+        android:orderInCategory="400"
+        android:title="@string/action_send"
+        android:visible="true">
+
+    </item>
+
+    <item
+        android:enabled="true"
+        android:id="@+id/action_deleteMaterial"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:orderInCategory="500"
+        android:title="@string/action_delete"
+        android:visible="true"
+
+        />
+</menu>

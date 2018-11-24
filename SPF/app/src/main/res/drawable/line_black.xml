@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="40dp"
+    android:height="2dp"
+    android:viewportWidth="40"
+    android:viewportHeight="2">
+
+    <path
+        android:name="path_progress"
+        android:pathData="M 0 0 h100"
+
+
+        android:strokeColor="#dddddd"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+
+        android:trimPathEnd="1"/>
+    </vector>

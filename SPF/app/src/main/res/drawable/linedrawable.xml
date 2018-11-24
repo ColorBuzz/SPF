@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/lines_shape"
+        android:top="1dp"
+        android:left="8dp"
+        android:right="8dp"
+
+        android:bottom="1dp" />
+
+    
+</layer-list>

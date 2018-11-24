@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/containertem"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_black_line"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="8dp"
+    android:showDividers="none">
+
+    <include
+
+        android:id="@+id/title"
+        layout="@layout/edit_dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp" />
+
+    <ScrollView
+        style="@style/scrollbar_shape_style"
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent"
+
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:showDividers="none"><![CDATA[
+
+        android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+
+
+
+
+
+
+
+
+
+
+
+            ]]>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_weight="0.1"
+                    app:srcCompat="@drawable/ic_person_grey_24dp" />
+
+                <EditText
+                    android:id="@+id/txtName"
+                    style="@style/myEditTextField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+
+                    android:layout_weight="0.9"
+                    android:background="@drawable/edit_selector"
+                    android:backgroundTintMode="src_over"
+                    android:enabled="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:hint="@string/contact_Name"
+                    android:inputType="text|textPersonName"
+                    android:paddingBottom="8dp"
+                    android:textColor="@color/textColorPrimary"
+                    android:textColorHighlight="@color/colorAccentLight"
+                    android:textColorHint="@color/textColorSecondary"
+                    android:textColorLink="@color/colorAccent"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_weight="0.1"
+                    app:srcCompat="@drawable/ic_phone_grey_24dp" />
+
+                <EditText
+                    android:id="@+id/txtPhone"
+                    style="@style/myEditTextField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+
+                    android:layout_weight="0.9"
+                    android:background="@drawable/edit_selector"
+                    android:backgroundTintMode="src_over"
+                    android:enabled="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:hint="@string/contact_Phone"
+                    android:inputType="phone"
+                    android:paddingBottom="8dp"
+                    android:textColor="@color/textColorPrimary"
+                    android:textColorHighlight="@color/colorAccentLight"
+                    android:textColorHint="@color/textColorSecondary"
+                    android:textColorLink="@color/colorAccent"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_weight="0.1"
+                    app:srcCompat="@drawable/ic_location_on_grey_24dp" />
+
+                <EditText
+                    android:id="@+id/txtAdress"
+                    style="@style/myEditTextField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+
+                    android:layout_weight="0.9"
+                    android:background="@drawable/edit_selector"
+                    android:backgroundTintMode="src_over"
+                    android:enabled="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:hint="@string/contact_Adress"
+                    android:inputType="text|textPostalAddress"
+                    android:paddingBottom="8dp"
+                    android:textColor="@color/textColorPrimary"
+                    android:textColorHighlight="@color/colorAccentLight"
+                    android:textColorHint="@color/textColorSecondary"
+                    android:textColorLink="@color/colorAccent"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_weight="0.1"
+                    app:srcCompat="@drawable/ic_business_grey_24dp" />
+
+                <EditText
+                    android:id="@+id/txtCompany"
+                    style="@style/myEditTextField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+
+                    android:layout_weight="0.9"
+                    android:background="@drawable/edit_selector"
+                    android:backgroundTintMode="src_over"
+                    android:enabled="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:hint="@string/contact_Company"
+                    android:inputType="text"
+                    android:paddingBottom="8dp"
+                    android:textColor="@color/textColorPrimary"
+                    android:textColorHighlight="@color/colorAccentLight"
+                    android:textColorHint="@color/textColorSecondary"
+                    android:textColorLink="@color/colorAccent"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_weight="0.1"
+                    app:srcCompat="@drawable/ic_email_grey_24dp" />
+
+                <EditText
+                    android:id="@+id/txtEmail"
+                    style="@style/myEditTextField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+
+                    android:layout_weight="0.9"
+                    android:background="@drawable/edit_selector"
+                    android:backgroundTintMode="src_over"
+                    android:enabled="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:hint="@string/contact_Email"
+                    android:inputType="text|textEmailAddress"
+                    android:paddingBottom="8dp"
+                    android:textColor="@color/textColorPrimary"
+                    android:textColorHighlight="@color/colorAccentLight"
+                    android:textColorHint="@color/textColorSecondary"
+                    android:textColorLink="@color/colorAccent"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    app:srcCompat="@drawable/ic_info_grey_24dp" />
+
+                <EditText
+                    android:id="@+id/txtCategory"
+                    style="@style/myEditTextField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+
+                    android:layout_weight="0.9"
+                    android:background="@drawable/edit_selector"
+                    android:backgroundTintMode="src_over"
+                    android:enabled="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:hint="@string/action_newCategory"
+                    android:inputType="text|textEmailAddress"
+                    android:paddingBottom="8dp"
+                    android:textColor="@color/textColorPrimary"
+                    android:textColorHighlight="@color/colorAccentLight"
+                    android:textColorHint="@color/textColorSecondary"
+                    android:textColorLink="@color/colorAccent"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/categoryPopUp"
+                    android:layout_width="32dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    app:srcCompat="@drawable/ic_keyboard_arrow_down_grey_24dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

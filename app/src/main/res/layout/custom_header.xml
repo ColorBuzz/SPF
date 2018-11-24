@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data class="HeaderBinding">
+        <variable
+            name="obj" type="com.colorbuzztechgmail.spf.CustomHeader"
+            />
+    </data>
+
+    <com.colorbuzztechgmail.spf.CheckableLinearLayout
+        android:id="@+id/titleCheckLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:animateLayoutChanges="true"
+        android:background="@drawable/header_selector"
+        android:clickable="true"
+        android:divider="@drawable/lines_shape"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="@dimen/dialog_Button_Height"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@{obj.image ?? @drawable/ic_menu_selector1}" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:showDividers="none">
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+
+                android:clickable="false"
+                android:gravity="center_vertical"
+                android:paddingLeft="8dp"
+                android:paddingRight="16dp"
+                android:text="@{obj.title}"
+                android:textAlignment="@{obj.isEmpty}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Small"
+                android:textColor="@drawable/title_color_selector"
+                />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:visibility="@{obj.isEmpty}">
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="@dimen/dialog_Button_Height"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+
+                android:src="@drawable/ic_keyboard_arrow_down_primary_dark_24dp" />
+        </FrameLayout>
+
+    </com.colorbuzztechgmail.spf.CheckableLinearLayout>
+
+</layout>

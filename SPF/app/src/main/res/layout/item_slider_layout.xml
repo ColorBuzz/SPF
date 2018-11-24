@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center_vertical|center_horizontal">
+
+    <data class="MaterialCardBinding">
+
+        <variable
+            name="obj"
+            type="com.colorbuzztechgmail.spf.Material" />
+    </data>
+
+
+    <com.colorbuzztechgmail.spf.CheckableLinearLayout
+        android:id="@+id/checkLayout"
+        android:layout_width="@dimen/piece_pic_detail_size"
+        android:layout_height="@dimen/piece_pic_detail_size"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:background="@drawable/checkedroundedlayout"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+        android:padding="2dp">
+
+        <FrameLayout
+            android:id="@+id/imgMaterial"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="auto"
+            android:focusableInTouchMode="true">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@{obj.image}" />
+
+            <TextView
+                android:id="@+id/text"
+                style="@style/titleText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+
+                android:layout_weight="1"
+
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:paddingEnd="4dp"
+                android:paddingStart="4dp"
+                android:rotation="0"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="@{obj.name}"
+                android:textAlignment="center" />
+
+        </FrameLayout>
+
+    </com.colorbuzztechgmail.spf.CheckableLinearLayout>
+
+</layout>

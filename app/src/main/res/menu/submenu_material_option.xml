@@ -1,0 +1,69 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.colorbuzztechgmail.spf.MaterialActivity">
+    <item
+        android:id="@+id/action_menu"
+        android:enabled="true"
+        android:icon="@drawable/ic_more_vert_black_24dp"
+        android:orderInCategory="200"
+        android:title="@string/action_setting"
+        android:visible="true"
+        app:showAsAction="ifRoom">
+        <menu>
+
+
+            <item
+                android:id="@+id/action_preview"
+                android:enabled="true"
+                android:icon="@drawable/ic_search_white_24dp"
+                android:orderInCategory="100"
+                android:title="@string/piece_view"
+                android:visible="true" />
+            <item
+                android:id="@+id/action_pieces"
+                android:enabled="true"
+                android:icon="@drawable/ic_piece_white"
+                android:orderInCategory="200"
+                android:title="@string/action_piecesMaterial"
+                android:visible="true">
+
+
+            </item>
+
+            <item
+                android:id="@+id/action_customMaterial"
+                android:enabled="true"
+                android:icon="@drawable/ic_leather_white"
+                android:orderInCategory="300"
+                android:title="@string/action_customMaterial"
+                android:visible="true">
+
+            </item>
+
+
+            <item
+                android:id="@+id/action_deleteCustomMaterial"
+                android:enabled="true"
+                android:icon="@drawable/ic_undo_white_24dp"
+                android:orderInCategory="400"
+                android:title="@string/action_delete_customMaterial"
+                android:visible="false"
+
+                />
+
+            <item
+                android:id="@+id/action_edit"
+                android:enabled="true"
+                android:icon="@drawable/ic_mode_edit_white_24dp"
+                android:orderInCategory="500"
+                android:title="@string/action_edit"
+                android:visible="true">
+
+            </item>
+
+        </menu>
+    </item>
+
+
+</menu>

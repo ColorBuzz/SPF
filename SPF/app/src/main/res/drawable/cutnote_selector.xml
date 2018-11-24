@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_active="true">
+        <shape>
+            <solid android:color="@color/colorGreen_A400" />
+
+            <corners
+
+                android:radius="2dp">
+
+
+            </corners>
+        </shape>
+
+
+    </item>
+
+    <item android:state_active= "false">
+        <shape>
+            <solid android:color="@color/colorAmber_A400" />
+
+            <corners
+
+                android:radius="2dp">
+
+
+            </corners>
+        </shape>
+    </item>
+    <item android:drawable="@color/colorRed_A400" />
+
+
+
+
+</selector>

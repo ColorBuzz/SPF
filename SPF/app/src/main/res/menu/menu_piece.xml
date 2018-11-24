@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/action_view"
+        android:icon="@drawable/ic_list_white_24dp"
+        android:title="@string/action_viewMode"
+        app:showAsAction="ifRoom" />
+    <item
+                android:id="@+id/action_addpiece"
+                android:enabled="true"
+                android:icon="@drawable/ic_add_plus_black_24dp"
+                android:orderInCategory="100"
+
+                android:title="@string/action_addpiece"
+                android:visible="true">
+
+            </item>
+
+            <item
+                android:id="@+id/action_movepiece"
+                android:enabled="true"
+                android:icon="@drawable/ic_assessment_white_24dp"
+                android:orderInCategory="200"
+                android:title="@string/piece_move"
+                android:visible="true">
+
+            </item>
+
+
+
+</menu>
+
+
+
+

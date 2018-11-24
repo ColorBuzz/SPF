@@ -1,0 +1,120 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.colorbuzztechgmail.spf.MainActivity" >
+
+<group
+    android:id="@+id/group_options">
+
+
+    <item
+        android:id="@+id/action_filter"
+        android:enabled="true"
+        android:icon="@drawable/ic_check_white_24dp"
+        android:orderInCategory="100"
+        android:title="@string/action_filter"
+        android:visible="true"
+        app:showAsAction="ifRoom|withText" />
+
+    <item
+        android:id="@+id/action_sort"
+        android:enabled="true"
+        android:icon="@drawable/ic_sort_white_24dp"
+        android:orderInCategory="200"
+        android:title="@string/action_sort"
+        android:visible="true"
+        app:showAsAction="never|ifRoom">
+
+        <menu>
+            <group
+                android:id="@+id/materialSortType"
+                android:checkableBehavior="single"
+                android:menuCategory="container">
+                <item
+                    android:id="@+id/action_sortModel"
+                    android:checked="true"
+                    android:title="@string/action_sortModel" />
+
+                <item
+                    android:id="@+id/action_sortState"
+                    android:checked="false"
+                    android:title="@string/action_sortState" />
+
+                <item
+                    android:id="@+id/action_sortDate"
+                    android:checked="false"
+                    android:title="@string/action_sortDate" />
+
+            </group>
+        </menu>
+
+    </item>
+    <item
+        android:id="@+id/action_searchBar"
+        android:enabled="true"
+        android:icon="@drawable/ic_search_white_24dp"
+        android:orderInCategory="300"
+        android:title="@string/action_search"
+        android:visible="true"
+        app:searchIcon="@drawable/ic_search_white_24dp"
+        app:showAsAction="ifRoom" />
+
+
+
+
+</group>
+
+    <group
+        android:id="@+id/group_search"
+        android:visible="false">
+
+
+
+        <item
+            android:id="@+id/action_search"
+            android:icon="@drawable/ic_more_vert_white_24dp"
+            android:title="@string/action_searchParameter"
+            app:showAsAction="never|always">
+            <menu>
+                <group
+                    android:id="@+id/searchType"
+                    android:checkableBehavior="single"
+                    android:menuCategory="container">
+                    <item
+                        android:id="@+id/action_searchName"
+                        android:checked="true"
+                        android:enabled="true"
+
+                        android:orderInCategory="100"
+                        android:title="@string/piece_Name"
+                        android:visible="true" />
+
+
+                    <item
+                        android:id="@+id/action_searchReference"
+
+                        android:enabled="true"
+                        android:orderInCategory="200"
+                        android:title="@string/model_custumer"
+                        android:visible="true">
+
+                    </item>
+
+
+                    <item
+                        android:id="@+id/action_searchPairsCount"
+
+                        android:enabled="true"
+                        android:orderInCategory="400"
+                        android:title="@string/material_seasons"
+                        android:visible="true">
+
+                    </item>
+
+                </group>
+            </menu>
+        </item>
+
+    </group>
+
+</menu>

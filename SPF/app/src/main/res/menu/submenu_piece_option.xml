@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/action_menu"
+        android:enabled="true"
+        android:icon="@drawable/ic_more_vert_black_24dp"
+        android:orderInCategory="200"
+        android:title="@string/action_setting"
+        android:visible="true"
+        app:showAsAction="ifRoom">
+        <menu>
+
+            <item
+                android:id="@+id/action_preview"
+                android:enabled="true"
+                android:icon="@drawable/ic_search_white_24dp"
+                android:orderInCategory="100"
+
+                android:title="@string/piece_view"
+                android:visible="true">
+
+            </item>
+
+            <item
+                android:id="@+id/action_pieceList"
+                android:enabled="true"
+                android:icon="@drawable/ic_assessment_white_24dp"
+                android:orderInCategory="200"
+                android:title="@string/piece_SizeList"
+                android:visible="true">
+
+            </item>
+            <item
+                android:id="@+id/action_editPiece"
+                android:enabled="true"
+                android:icon="@drawable/ic_mode_edit_white_24dp"
+                android:orderInCategory="300"
+                android:title="@string/action_edit"
+                android:visible="true"></item>
+
+            <item
+                android:id="@+id/action_move"
+                android:enabled="true"
+                android:icon="@drawable/ic_mode_edit_grey_24dp"
+                android:orderInCategory="400"
+                android:title="@string/piece_changeMaterial"
+                android:visible="false">
+
+            </item>
+
+            <item
+                android:id="@+id/action_send"
+                android:enabled="true"
+                android:icon="@drawable/ic_share_white_24dp"
+                android:orderInCategory="500"
+                android:title="@string/action_send"
+                android:visible="false">
+
+            </item>
+            <item
+                android:id="@+id/action_delete"
+                android:enabled="true"
+                android:icon="@drawable/ic_delete_white_24dp"
+                android:orderInCategory="600"
+                android:title="@string/action_delete"
+                android:visible="false">
+
+            </item>
+
+        </menu>
+
+    </item>
+
+
+</menu>

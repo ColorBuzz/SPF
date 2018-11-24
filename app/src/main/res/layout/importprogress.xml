@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="32dp"
+    android:layout_height="32dp"
+    android:id="@+id/reconnectBarLayout"
+    android:visibility="visible"
+    >
+
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/reconnectBar"
+        android:layout_gravity="left|top"
+        android:indeterminate="false"
+        android:max="100"
+        android:theme="@style/AppTheme"
+        android:visibility="visible"
+        android:progress="1"
+        />
+</FrameLayout>

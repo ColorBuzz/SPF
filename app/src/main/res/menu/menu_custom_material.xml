@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group
+         android:id="@+id/group_options">
+        <item
+            android:id="@+id/action_add"
+            android:icon="@drawable/ic_add_box_white_24dp"
+            android:orderInCategory="400"
+            android:title="@string/action_add"
+            app:showAsAction="ifRoom" />
+
+        <item
+            android:id="@+id/action_leather"
+            android:enabled="true"
+            android:icon="@drawable/ic_leather_white_24dp"
+            android:orderInCategory="200"
+            android:title="@string/material_type"
+            android:visible="true"
+            app:showAsAction="never|ifRoom">
+
+        </item>
+        <item
+            android:id="@+id/action_dealer"
+            android:enabled="true"
+            android:icon="@drawable/ic_person_white_24dp"
+            android:orderInCategory="300"
+            android:title="@string/dealership_dealerships"
+            android:visible="true"
+            app:showAsAction="never|ifRoom">
+
+        </item>
+        <item
+            android:id="@+id/action_search"
+            android:enabled="true"
+            android:icon="@drawable/ic_search_white_24dp"
+            android:orderInCategory="300"
+            android:title="@string/action_search"
+            android:visible="true"
+            app:showAsAction="never|ifRoom">
+
+        </item>
+        <item
+            android:id="@+id/action_recent"
+            android:enabled="true"
+            android:icon="@drawable/ic_access_time_white_24dp"
+            android:orderInCategory="100"
+            android:title="@string/importRecent_Cat"
+
+            android:visible="true"
+            app:showAsAction="never|ifRoom" />
+
+
+    </group>
+
+</menu>

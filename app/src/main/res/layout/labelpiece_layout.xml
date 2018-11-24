@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data class="PieceCardBinding">
+        <variable
+            name="obj" type="com.colorbuzztechgmail.spf.Piece"
+            />
+    </data>
+
+
+        <com.colorbuzztechgmail.spf.CheckableLinearLayout
+            android:id="@+id/materialContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/checkedroundedlayout"
+            android:dividerPadding="6dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:showDividers="middle">
+
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{obj.getName}"
+
+                android:textColor="@color/textColorPrimary"
+                android:textSize="16sp" />
+
+            <FrameLayout
+                android:id="@+id/imgMaterial"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:src="@{obj.getImage}"
+                    android:visibility="visible" />
+            </FrameLayout>
+
+        </com.colorbuzztechgmail.spf.CheckableLinearLayout>
+
+
+
+</layout>

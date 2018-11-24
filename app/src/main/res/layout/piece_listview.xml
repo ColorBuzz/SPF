@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data class="PieceListBinding">
+        <variable
+            name="obj" type="com.colorbuzztechgmail.spf.Piece"
+            />
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/searchFolder_Height"
+        app:cardBackgroundColor="@color/iconsColor"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:gravity="left|center_vertical"
+            android:theme="?attr/actionBarTheme">
+
+            <LinearLayout
+                android:id="@+id/cardContainer"
+
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_centerHorizontal="false"
+                android:animateLayoutChanges="true"
+                android:divider="@drawable/linedrawable"
+                android:dividerPadding="0dp"
+                android:elevation="0dp"
+                android:fitsSystemWindows="true"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:showDividers="none"
+                android:weightSum="1">
+
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".25"
+                    android:background="@drawable/bg_black_light_grey">
+
+                    <ImageView
+                        android:id="@+id/imgPiece"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:id="@+id/container"
+                    android:layout_width="0dp"
+
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.85"
+                    android:gravity="left|center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="8dp"
+                        android:text="Nombre"
+                        android:textColor="@color/textColorSecondary" />
+
+                    <TextView
+                        android:id="@+id/text1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="8dp"
+                        android:text="Material"
+                        android:textAppearance="@android:style/TextAppearance.Material.Large"
+                        android:textColor="@color/textColorPrimary" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+    </android.support.v7.widget.CardView>
+
+
+
+
+
+</layout>

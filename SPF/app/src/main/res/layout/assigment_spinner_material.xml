@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/di"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:showDividers="middle"
+    android:visibility="visible">
+
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:background="@android:color/transparent"
+        android:drawSelectorOnTop="false"
+        android:dropDownSelector="@drawable/drawable_color_accent_gradient"
+        android:gravity="left|center_vertical"
+        android:scrollbarSize="4dp"
+        android:scrollbarStyle="outsideInset"
+        android:scrollbarThumbVertical="@drawable/drawable_orange_gradient"
+        android:scrollbarTrackVertical="@drawable/drawable_color_primary_gradient" />
+
+</FrameLayout>

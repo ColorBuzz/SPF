@@ -1,0 +1,27 @@
+<resources>
+    <dimen name="padding">16dp</dimen>
+
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="card_witdh">200dp</dimen>
+    <dimen name="card_height">200dp</dimen>
+
+    <dimen name="piece_pic_size">150dp</dimen>
+    <dimen name="piece_pic_detail_size">65dp</dimen>
+
+    <dimen name="card_subtitle">5dp</dimen>
+    <dimen name="profile_pic_size">150dp</dimen>
+    <dimen name="profile_pic_small_size">24dp</dimen>
+
+    <dimen name="searchItem_Width">175dp</dimen>
+    <dimen name="searchFolder_Width">70dp</dimen>
+    <dimen name="searchFolder_Height">100dp</dimen>
+    <dimen name="titleText">14dp</dimen>
+    <dimen name="subTitleText">16dp</dimen>
+    <dimen name="actionBarHeight">56dp</dimen>
+
+    <dimen name="dialog_Button_Height">36dp</dimen>
+
+
+
+
+</resources>

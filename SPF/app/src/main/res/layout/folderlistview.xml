@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/cardContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="false"
+    android:layout_centerVertical="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="0">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="@dimen/searchFolder_Width"
+                android:layout_height="@dimen/searchFolder_Width"
+                android:cropToPadding="false"
+                app:srcCompat="@drawable/ic_folder_selector" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/pathText"
+                    style="@style/titleText"
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:ems="5"
+                    android:text="Folder"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/countTxt"
+                    style="@style/subTitleText"
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:ems="5"
+                    android:gravity="bottom"
+                    android:text="items"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/textColorSecondary" />
+
+            </LinearLayout>
+        </FrameLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

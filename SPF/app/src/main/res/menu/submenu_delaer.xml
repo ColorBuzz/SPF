@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_relations"
+        android:enabled="true"
+        android:icon="@drawable/ic_leather_grey"
+        android:orderInCategory="100"
+        android:title="Relaciones"
+        android:visible="true">
+
+
+    </item>
+</menu>

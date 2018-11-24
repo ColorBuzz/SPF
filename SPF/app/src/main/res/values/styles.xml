@@ -1,0 +1,167 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!--This line changes the color of text in Toolbar-->
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <!--This line changes the color of icons in toolbar (back, overflow menu icons)-->
+        <item name="android:textColorSecondary">@color/iconsColor</item>
+        <item name="android:colorPrimary">@color/colorPrimary</item>
+        <item name="android:colorMultiSelectHighlight">@color/colorAccent</item>
+
+        <!--Action Mode Bar overlay Toolbar-->
+        <item name="windowActionModeOverlay">true</item>
+
+
+        <!--Action Mode Bar Background-->
+        <item name="android:actionModeBackground">@color/colorPrimaryDark</item>
+        <!--Icon on Scroll-->
+        <item name="android:fastScrollThumbDrawable">@drawable/scroller_style</item>
+
+
+    </style>
+
+    <style name="scrollbar_shape_style">
+        <item name="android:scrollbarAlwaysDrawVerticalTrack">false</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:fadeScrollbars">true</item>
+        <item name="android:scrollbarThumbVertical">@drawable/drawable_orange_gradient</item>
+        <item name="android:scrollbarTrackVertical">@drawable/drawable_color_primary_gradient</item>
+        <item name="android:scrollbarSize">4dp</item>
+        <item name="android:scrollbarFadeDuration">2000</item>
+        <item name="android:scrollbarDefaultDelayBeforeFade">1000</item>
+
+
+
+    </style>
+    <style name="scrollbar_shape_style_horizontal">
+        <item name="android:scrollbarAlwaysDrawHorizontalTrack">false</item>
+        <item name="android:scrollbarStyle">outsideInset</item>
+        <item name="android:scrollbars">horizontal</item>
+        <item name="android:fadeScrollbars">true</item>
+        <item name="android:scrollbarThumbVertical">@drawable/scroller_vertical_thumb</item>
+        <item name="android:scrollbarTrackVertical">@drawable/scroller_vertical_track</item>
+        <item name="android:scrollbarSize">4dp</item>
+        <item name="android:scrollbarFadeDuration">2000</item>
+        <item name="android:scrollbarDefaultDelayBeforeFade">1000</item>
+
+    </style>
+
+   <style name="myEditTextField" parent="Widget.AppCompat.EditText">
+    <item name="android:textColor">@color/colorPrimaryDark</item>
+    <item name="android:textColorHint">@color/colorAccent</item>
+    <item name="colorAccent">@color/colorAccent</item>
+    <item name="colorControlNormal">@color/textColorSecondary</item>
+    <item name="colorControlActivated">@color/colorPurple_900</item>
+    
+   </style>
+
+    <style name="titleText" parent="Widget.AppCompat.TextView.SpinnerItem">
+    <item name="android:textColor">@color/textColorSecondary</item>
+    <item name="android:textColorHint">@color/textColorSecondary</item>
+    <item name="colorControlActivated">@color/colorAccentDark</item>
+    <item name="android:textSize">@dimen/titleText</item>
+    <item name="android:gravity">left</item>
+    <item name="android:drawablePadding">4dp</item>
+    </style>
+
+    <style name="subTitleText" parent="Widget.AppCompat.TextView.SpinnerItem">
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="android:textColorHint">@color/textColorSecondary</item>
+        <item name="colorControlActivated">@color/colorAccentLight</item>
+        <item name="android:drawablePadding">4dp</item>
+        <item name="android:textSize">@dimen/subTitleText</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+    <style name="MY.DIALOG" parent="AppTheme" >
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowAnimationStyle">@style/Animation.MyDialog</item>
+
+
+
+    </style>
+
+    <style name="Animation.MyDialog" parent="android:Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/slide_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_bottom</item>
+    </style>
+
+
+
+
+    <style name="myCheckbox" parent="Widget.AppCompat.CompoundButton.CheckBox">
+
+        <item name="android:button">@drawable/ic_check_box_outline_grey_24dp</item>
+        <item name="android:checkMark">@drawable/ic_check_box_accent_24dp</item>
+        <item name="android:checkable">true</item>
+
+
+
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="AppBarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!--This line changes the color of text in Toolbar-->
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <!--This line changes the color of icons in toolbar (back, overflow menu icons)-->
+        <item name="android:textColorSecondary">@color/textColorPrimary</item>
+        <item name="android:colorPrimary">@color/colorPrimary</item>
+        <item name="android:colorMultiSelectHighlight">@color/colorAccent</item>
+
+        <!--Action Mode Bar overlay Toolbar-->
+        <item name="windowActionModeOverlay">true</item>
+
+
+        <!--Action Mode Bar Background-->
+        <item name="android:actionModeBackground">@color/colorPrimaryDark</item>
+        <!--Icon on Scroll-->
+        <item name="android:fastScrollThumbDrawable">@drawable/scroller_style</item>
+
+
+    </style>
+    <style name="AppBarThemeLight" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!--This line changes the color of text in Toolbar-->
+        <item name="android:textColorPrimary">@color/iconsColor</item>
+        <!--This line changes the color of icons in toolbar (back, overflow menu icons)-->
+        <item name="android:textColorSecondary">@color/iconsColor</item>
+        <item name="android:textColorHint">@color/textColorSecondary</item>
+
+        <item name="android:colorPrimary">@color/colorPrimary</item>
+        <item name="android:colorMultiSelectHighlight">@color/colorAccent</item>
+
+        <!--Action Mode Bar overlay Toolbar-->
+        <item name="windowActionModeOverlay">true</item>
+
+
+        <!--Action Mode Bar Background-->
+        <item name="android:actionModeBackground">@color/colorPrimary</item>
+        <!--Icon on Scroll-->
+        <item name="android:fastScrollThumbDrawable">@drawable/scroller_style</item>
+
+
+    </style>
+
+</resources>

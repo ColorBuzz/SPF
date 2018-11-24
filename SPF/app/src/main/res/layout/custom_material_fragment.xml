@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutMode="opticalBounds"
+    tools:context="com.colorbuzztechgmail.spf.MainActivity">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:duplicateParentState="false"
+            android:isScrollContainer="false"
+            android:orientation="vertical"
+            android:overScrollMode="ifContentScrolls">
+
+            <LinearLayout
+                android:id="@+id/materialFragmentContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/materialrecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:scrollbarStyle="outsideOverlay"
+                    android:scrollbars="vertical"
+                    tools:context=".MainActivity" />
+            </LinearLayout>
+
+            <ScrollView
+                android:id="@+id/scrollContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+                android:fadeScrollbars="false"
+                android:fastScrollAlwaysVisible="true"
+                android:fastScrollEnabled="false"
+                android:fillViewport="true"
+                android:saveEnabled="false"
+                android:scrollIndicators="right"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:scrollbarSize="0dip"
+                android:scrollbarStyle="outsideInset"
+                android:scrollbars="vertical"
+                android:visibility="gone">
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <FrameLayout
+                        android:id="@+id/infomaterialContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                    </FrameLayout>
+                </FrameLayout>
+            </ScrollView>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+</RelativeLayout>
+
+

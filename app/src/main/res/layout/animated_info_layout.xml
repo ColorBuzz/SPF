@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data class="MaterialInfoBinding">
+        <variable
+            name="obj" type="com.colorbuzztechgmail.spf.CustomMaterial"
+            />
+    </data>
+
+    <LinearLayout
+
+        android:id="@+id/infomaterialContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top|center"
+        android:addStatesFromChildren="false"
+        android:animateLayoutChanges="false"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+
+        <LinearLayout
+            android:id="@+id/addmaterial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center_vertical|center_horizontal"
+            android:layout_marginBottom="8dp"
+            android:animateLayoutChanges="false"
+            android:elevation="4dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+
+            <TextView
+                android:id="@+id/addEditText4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:drawableLeft="@drawable/ic_info_grey_24dp"
+                android:gravity="center"
+                android:padding="4dp"
+                android:paddingEnd="0dp"
+                android:paddingStart="0dp"
+                android:text="@string/action_customMaterial"
+                android:textSize="18sp">
+
+
+            </TextView>
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="false"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:gravity="top"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|center_horizontal"
+                    android:layout_weight="1"
+
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingBottom="8dp"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="6dp">
+
+                        <TextView
+                            android:id="@+id/textView1"
+                            style="@style/titleText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/material_Name"
+                            android:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/subTextView1"
+                            style="@style/subTitleText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{obj.name}"
+                            android:visibility="visible" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="6dp">
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            style="@style/titleText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/material_type"
+                            android:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/subTextView2"
+                            style="@style/subTitleText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{obj.type}"
+
+                            android:visibility="visible" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="6dp">
+
+                        <TextView
+                            android:id="@+id/textView3"
+                            style="@style/titleText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/material_dealership"
+                            android:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/subTextView3"
+                            style="@style/subTitleText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{obj.dealership}"
+                            android:visibility="visible" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|center_horizontal"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center"
+                    android:orientation="vertical"
+
+                    android:paddingBottom="8dp"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="6dp">
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            style="@style/titleText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:inputType="text"
+                            android:text="@string/material_stock"
+                            android:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/subTextView5"
+                            style="@style/subTitleText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text='@{String.format("%s " + @string/units_feet,String.valueOf(obj.feets)).toLowerCase()}'
+                            android:visibility="visible" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="6dp">
+
+                        <TextView
+                            android:id="@+id/textView6"
+                            style="@style/titleText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:inputType="text"
+                            android:text="@string/material_seasons"
+                            android:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/subTextView6"
+                            style="@style/subTitleText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:numeric="decimal"
+                            android:text="@{obj.seasons}"
+                            android:visibility="visible" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="6dp">
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            style="@style/titleText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:focusableInTouchMode="false"
+                            android:gravity="center_vertical"
+                            android:inputType="text"
+                            android:text="@string/material_date"
+                            android:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/subTextView4"
+                            style="@style/subTitleText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:cursorVisible="true"
+                            android:enabled="true"
+                            android:text="@{obj.date}"
+                            android:visibility="visible" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/imageContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:animateLayoutChanges="true"
+            android:divider="@drawable/linedrawable"
+            android:orientation="vertical"
+            android:showDividers="end">
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

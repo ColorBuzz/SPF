@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.colorbuzztechgmail.spf.CheckableLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/materialContainer"
+    android:layout_width="@dimen/piece_pic_detail_size"
+    android:layout_height="@dimen/piece_pic_detail_size"
+    android:background="@drawable/checkedroundedlayout"
+    android:padding="2dp">
+
+    <FrameLayout
+        android:id="@+id/imgMaterial"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text"
+            style="@style/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center"
+            android:ellipsize="marquee"
+            android:focusable="true"
+
+            android:focusableInTouchMode="true"
+
+            android:paddingEnd="4dp"
+            android:paddingStart="4dp"
+            android:rotation="0"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:text="Pieza"
+            android:textAlignment="inherit" />
+    </FrameLayout>
+</com.colorbuzztechgmail.spf.CheckableLinearLayout>

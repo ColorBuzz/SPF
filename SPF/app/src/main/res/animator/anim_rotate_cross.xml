@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+    <objectAnimator
+
+        android:name="cross_path"
+        android:propertyName="rotation"
+        android:duration="700"
+        android:valueFrom="0"
+        android:valueTo="360"
+        android:valueType="floatType"
+        android:interpolator="@android:interpolator/fast_out_linear_in"
+        />
+
+
+</set>

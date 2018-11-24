@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/spinnerItem"
+    android:layout_width="match_parent"
+
+
+    android:layout_height="match_parent"
+    android:layout_gravity="left"
+    android:background="@drawable/spinner_selector"
+    android:drawablePadding="16dp"
+    android:elegantTextHeight="true"
+    android:fitsSystemWindows="false"
+    android:gravity="left|center_vertical"
+    android:padding="8dp"
+    android:textAlignment="textStart"
+    android:textColor="@color/textColorPrimary"
+    android:textSize="18sp" />

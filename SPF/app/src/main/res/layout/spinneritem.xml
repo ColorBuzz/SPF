@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/spinnerItem"
+    android:layout_width="wrap_content"
+
+
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:drawableLeft="@drawable/ic_keyboard_arrow_down_white_24dp"
+    android:elegantTextHeight="true"
+    android:fitsSystemWindows="false"
+    android:padding="4dp"
+    android:textAlignment="textStart"
+    android:textColor="@color/iconsColor"
+    android:textSize="18sp" />

@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data class="CutNoteBinding">
+        <variable
+            name="obj" type="com.colorbuzztechgmail.spf.CutNote"
+            />
+
+    </data>
+
+
+    <LinearLayout
+        android:id="@+id/animlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:layout_margin="0dp"
+        android:animateLayoutChanges="true"
+        android:clickable="true"
+        android:clipToPadding="false"
+        android:divider="@drawable/lines_shape"
+        android:dividerPadding="0dp"
+        android:orientation="vertical"
+        android:showDividers="beginning|end">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/iconsColor"
+            android:orientation="vertical"
+            android:showDividers="none">
+
+
+            <TextView
+
+
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/iconsColor"
+                android:drawableEnd="@drawable/ic_keyboard_arrow_down_grey_animatable_clockwise"
+                android:padding="8dp"
+                android:text="plantas"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/textColorSecondary"
+                android:visibility="gone" />
+
+            <com.colorbuzztechgmail.spf.CheckableLinearLayout
+                android:id="@+id/checkLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:animateLayoutChanges="true"
+                android:background="@drawable/checkedlayout"
+                android:clickable="true"
+                android:divider="@drawable/lines_shape"
+                android:orientation="horizontal"
+                android:showDividers="end">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="@dimen/profile_pic_small_size"
+                        android:layout_height="@dimen/profile_pic_small_size"
+                        android:layout_gravity="center"
+                        android:layout_margin="8dp"
+                        app:cardCornerRadius="4dp"
+                        app:cardElevation="4dp">
+
+                        <ImageView
+                            android:id="@+id/imageViewProfile"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+
+                            android:elevation="0dp"
+                            android:scaleType="centerCrop"
+                            android:visibility="visible" />
+                    </android.support.v7.widget.CardView>
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="4dp"
+                    android:showDividers="middle">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="4dp">
+
+                        <TextView
+                            android:id="@+id/text1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left|center_vertical"
+
+                            android:drawablePadding="8dp"
+
+                            android:drawableStart="@drawable/ic_file_24dp"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+
+                            android:focusableInTouchMode="true"
+                            android:rotation="0"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="@{String.valueOf(obj.reference) +  '/' + String.valueOf(obj.noteNumber)}"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/textColorPrimary" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center">
+
+                        <TextView
+                            android:id="@+id/text7"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left|center_vertical"
+                            android:drawablePadding="8dp"
+                            android:drawableStart="@drawable/ic_person_grey_24dp"
+                            android:singleLine="true"
+                            android:text="@{obj.worker}"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/textColorSecondary" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:id="@+id/text6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left|center_vertical"
+                        android:drawablePadding="8dp"
+                        android:drawableStart="@drawable/ic_piece_small"
+                        android:singleLine="true"
+                        android:text="@{String.valueOf(obj.pairCount)}"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/textColorSecondary" />
+                </FrameLayout>
+
+            </com.colorbuzztechgmail.spf.CheckableLinearLayout>
+
+
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone">
+
+
+                <TableLayout
+                    android:id="@+id/tableLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="*">
+
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorLightPrimary"
+                        android:divider="@drawable/horizontal_divider"
+                        android:showDividers="middle"
+                        android:visibility="visible">
+
+
+                        <TextView
+                            android:id="@+id/textView13"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingBottom="4dp"
+                            android:paddingLeft="4dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="4dp"
+                            android:text="35"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/textView26"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingBottom="4dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="4dp"
+                            android:text="36"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/textView36"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingBottom="4dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="4dp"
+                            android:text="37"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/textView35"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingBottom="4dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="4dp"
+                            android:text="38"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/textView34"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingBottom="4dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="4dp"
+                            android:text="39"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/textView33"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingBottom="4dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="4dp"
+                            android:text="40"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/textView32"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingBottom="4dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="4dp"
+                            android:text="41"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/textView31"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingBottom="4dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="4dp"
+                            android:text="42"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/textView30"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingBottom="4dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="4dp"
+                            android:text="43"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/textView29"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingBottom="4dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="4dp"
+                            android:text="44"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/textView28"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingBottom="4dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="4dp"
+                            android:text="45"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/textView27"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingBottom="4dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:paddingTop="4dp"
+                            android:text="46"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/textView37"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingBottom="4dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="4dp"
+                            android:paddingTop="4dp"
+                            android:text="47"
+                            android:textAlignment="center" />
+
+                    </TableRow>
+
+                </TableLayout>
+
+
+            </ScrollView>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</layout>

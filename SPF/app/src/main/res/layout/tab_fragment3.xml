@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parentLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/iconsColor"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="false"
+        android:layout_centerVertical="true"
+
+        android:animateLayoutChanges="false"
+        android:divider="@drawable/lines_shape"
+        android:orientation="vertical"
+        android:showDividers="none|beginning|middle|end">
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="8dp"
+            android:paddingBottom="4dp">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerPiece"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:scrollbarSize="2dp"
+                android:scrollbarStyle="insideOverlay"
+                android:scrollbarTrackHorizontal="@drawable/drawable_color_accent_gradient"
+                android:scrollbars="horizontal"></android.support.v7.widget.RecyclerView>
+
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:animateLayoutChanges="false"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/pieceToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_gravity="bottom"
+                android:textAlignment="center"
+                app:layout_collapseMode="none"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+            <FrameLayout
+                android:id="@+id/previewFrame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:elevation="1dp"
+                android:visibility="visible">
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+       >
+
+        <LinearLayout
+            android:id="@+id/animlayout"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+
+
+            android:layout_margin="0dp"
+            android:animateLayoutChanges="true"
+            android:background="@drawable/drawable_transparent"
+            android:clickable="true"
+            android:clipToPadding="false"
+            android:divider="@drawable/linedrawable"
+            android:dividerPadding="0dp"
+            android:orientation="vertical">
+
+
+            <com.colorbuzztechgmail.spf.CheckableLinearLayout
+                android:id="@+id/checkLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/checkedlayout"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.8">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <ImageView
+                            android:id="@+id/imageViewProfile"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.2"
+                            app:srcCompat="@drawable/ic_sort_black_24dp" />
+
+                        <TextView
+                            android:id="@+id/titleTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.8"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+
+                            android:gravity="center_vertical"
+                            android:nestedScrollingEnabled="true"
+                            android:scrollIndicators="left"
+                            android:text="@{obj.name}"
+                            android:textColor="@color/textColorPrimary" />
+                    </LinearLayout>
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/toggleFrame"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_weight="0.2"
+                    android:visibility="visible">
+
+
+                    <ImageView
+                        android:id="@+id/toggleBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center_vertical"
+                        android:clickable="false"
+                        android:focusableInTouchMode="false"
+                        android:paddingRight="8dp"
+                        android:src="@drawable/ic_keyboard_arrow_down_grey_animatable_clockwise"
+                        android:visibility="visible" />
+                </FrameLayout>
+
+            </com.colorbuzztechgmail.spf.CheckableLinearLayout>
+
+
+            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                android:id="@+id/expandableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center"
+                android:gravity="center"
+                app:ael_duration="50"
+                app:ael_expanded="false"
+                app:ael_interpolator="linear"
+                app:ael_orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/infoContainer"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="4dp"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                    <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/addFloating"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|right"
+                        android:layout_margin="8dp"
+                        app:backgroundTint="@color/colorAccentLight"
+                        app:elevation="16dp"
+                        app:fabSize="normal"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:srcCompat="@drawable/ic_menu_white_24dp" />
+
+                </FrameLayout>
+            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

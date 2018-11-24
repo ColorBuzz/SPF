@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search_white_24dp"
+        android:orderInCategory="200"
+        android:title="@string/action_search"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_sort"
+        android:enabled="true"
+        android:icon="@drawable/ic_sort_white_24dp"
+        android:orderInCategory="100"
+        android:title="@string/action_sort"
+        android:visible="true"
+        app:showAsAction="ifRoom">
+
+        <menu
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <group
+                android:id="@+id/cutNoteSortType"
+                android:checkableBehavior="single"
+                android:menuCategory="container">
+                <item
+                    android:id="@+id/action_sortModel"
+                    android:checked="false"
+                    android:title="@string/action_sortModel" />
+
+                <item
+                    android:id="@+id/action_sortState"
+                    android:checked="true"
+                    android:title="@string/action_sortState" />
+
+            </group>
+        </menu>
+
+    </item>
+    <item
+        android:id="@+id/action_title"
+        android:icon="@drawable/ic_unfold_white_selector"
+        android:orderInCategory="400"
+        android:title="@string/action_collapse_title"
+        app:showAsAction="ifRoom" />
+</menu>

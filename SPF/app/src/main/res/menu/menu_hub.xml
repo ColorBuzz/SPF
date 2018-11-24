@@ -1,0 +1,132 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.colorbuzztechgmail.spf.MainActivity" >
+
+<group
+    android:id="@+id/group_options">
+
+
+    <item
+        android:id="@+id/action_category"
+        android:enabled="true"
+        android:icon="@drawable/ic_folder_white_24dp"
+        android:orderInCategory="100"
+        android:title="@string/action_category"
+        android:visible="true"
+        app:showAsAction="ifRoom|withText" />
+
+    <item
+        android:id="@+id/action_sort"
+        android:enabled="true"
+        android:icon="@drawable/ic_sort_white_24dp"
+        android:orderInCategory="300"
+        android:title="@string/action_sort"
+        android:visible="true"
+        app:showAsAction="never|ifRoom">
+
+        <menu>
+            <group
+                android:id="@+id/materialSortType"
+                android:checkableBehavior="single"
+                android:menuCategory="container">
+                <item
+                    android:id="@+id/action_sortCategory"
+                    android:checked="true"
+                    android:title="@string/action_sortCategory" />
+                <item
+                    android:id="@+id/action_sortName"
+                    android:checked="false"
+                    android:title="@string/action_sortAlphabetical" />
+                <item
+                    android:id="@+id/action_sortDate"
+                    android:checked="false"
+                    android:title="@string/action_sortDate" />
+
+            </group>
+        </menu>
+
+    </item>
+    <item
+        android:id="@+id/action_searchBar"
+        android:enabled="true"
+        android:icon="@drawable/ic_search_white_24dp"
+        android:orderInCategory="200"
+        android:title="@string/action_search"
+        android:visible="true"
+        app:searchIcon="@drawable/ic_search_white_24dp" />
+
+    <item
+        android:id="@+id/action_newModel"
+        android:enabled="true"
+        android:orderInCategory="400"
+        android:title="@string/action_newModel"
+        android:visible="true"
+        app:showAsAction="never" />
+
+
+</group>
+
+    <group
+        android:id="@+id/group_search"
+        android:visible="false">
+
+
+
+        <item
+            android:id="@+id/action_search"
+            android:icon="@drawable/ic_more_vert_white_24dp"
+            android:title="@string/action_searchParameter"
+            app:showAsAction="never|always">
+            <menu>
+                <group
+                    android:id="@+id/searchType"
+                    android:checkableBehavior="single"
+                    android:menuCategory="container">
+                    <item
+                        android:id="@+id/action_searchName"
+                        android:checked="true"
+                        android:enabled="true"
+
+                        android:orderInCategory="100"
+                        android:title="@string/piece_Name"
+                        android:visible="true" />
+
+
+                    <item
+                        android:id="@+id/action_searchCustumer"
+
+                        android:enabled="true"
+                        android:orderInCategory="200"
+                        android:title="@string/model_custumer"
+                        android:visible="true">
+
+                    </item>
+
+                    <item
+                        android:id="@+id/action_searchCategories"
+                        android:enabled="true"
+                        android:orderInCategory="300"
+
+                        android:title="@string/action_category"
+                        android:visible="true" />
+
+
+
+                    <item
+                        android:id="@+id/action_searchSeasons"
+
+                        android:enabled="true"
+                        android:orderInCategory="400"
+                        android:title="@string/material_seasons"
+                        android:visible="true">
+
+                    </item>
+
+                </group>
+            </menu>
+        </item>
+
+    </group>
+
+</menu>

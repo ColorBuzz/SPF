@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_view"
+        android:icon="@drawable/ic_view_module_white_24dp"
+        android:orderInCategory="200"
+        android:title="@string/action_viewMode"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search_white_24dp"
+        android:orderInCategory="100"
+        android:title="@string/action_search"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_sort"
+        android:enabled="true"
+        android:icon="@drawable/ic_sort_white_24dp"
+        android:orderInCategory="300"
+        android:title="@string/action_sort"
+        android:visible="true"
+        app:showAsAction="never">
+
+        <menu
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <group
+                android:id="@+id/modelSortType"
+                android:checkableBehavior="single"
+                android:menuCategory="container">
+                <item
+                    android:id="@+id/action_sortCustumer"
+                    android:checked="false"
+                    android:orderInCategory="200"
+                    android:title="@string/action_sortCustumer" />
+                <item
+                    android:id="@+id/action_sortCategory"
+                    android:checked="false"
+                    android:orderInCategory="300"
+                    android:title="@string/action_sortDirectory" />
+                <item
+                    android:id="@+id/action_sortName"
+                    android:checked="true"
+                    android:orderInCategory="100"
+                    android:title="@string/action_sortAlphabetical" />
+                <item
+                    android:id="@+id/action_sortDate"
+                    android:checked="false"
+                    android:orderInCategory="400"
+                    android:title="@string/action_sortDate" />
+
+            </group>
+        </menu>
+
+    </item>
+    <item
+        android:id="@+id/action_title"
+        android:icon="@drawable/ic_unfold_white_selector"
+        android:orderInCategory="400"
+        android:title="@string/action_collapse_title"
+        app:showAsAction="ifRoom" />
+</menu>

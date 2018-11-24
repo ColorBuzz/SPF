@@ -1,0 +1,22 @@
+<com.wajahatkarim3.easyflipview.EasyFlipView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/flipView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top|center_vertical"
+    app:flipDuration="400"
+    app:flipEnabled="true"
+    app:flipFrom="front"
+    app:flipOnTouch="false"
+    app:flipType="horizontal">
+
+    <!-- Back Layout Goes Here -->
+    <include
+        android:id="@+id/backView"
+        layout="@layout/custom_material_grid_item_back" />
+
+    <!-- Front Layout Goes Here -->
+    <include
+        android:id="@+id/frontView"
+        layout="@layout/custom_material_grid_item" />
+</com.wajahatkarim3.easyflipview.EasyFlipView>

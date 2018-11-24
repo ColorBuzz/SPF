@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/containertem"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_black_line"
+    android:orientation="vertical"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="8dp">
+
+    <include
+
+        android:id="@+id/title"
+        layout="@layout/edit_dialog_title_small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginBottom="8dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            style="@style/scrollbar_shape_style"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical"><![CDATA[
+
+            android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+
+
+
+
+
+
+
+                ]]>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/addImageLayout"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/bg_black_light_grey"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:orientation="vertical"
+                        android:showDividers="beginning">
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/editMaterialNameTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edit_selector"
+                        android:backgroundTintMode="src_over"
+                        android:enabled="true"
+                        android:focusableInTouchMode="true"
+                        android:gravity="center_vertical"
+                        android:hint="@string/material_Name"
+                        android:inputType="text"
+                        android:paddingBottom="8dp"
+
+                        android:textColor="@color/textColorPrimary"
+                        android:textColorHighlight="@color/colorAccentLight"
+                        android:textColorLink="@color/colorAccent"
+                        android:textSize="16sp"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/txtMaterialType"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.9"
+                            android:background="@drawable/edit_selector"
+                            android:backgroundTintMode="src_over"
+                            android:enabled="true"
+                            android:focusableInTouchMode="true"
+                            android:gravity="center_vertical"
+                            android:hint="@string/addMateryalType"
+                            android:inputType="text"
+
+                            android:paddingBottom="8dp"
+                            android:textColor="@color/textColorPrimary"
+                            android:textColorHighlight="@color/colorAccentLight"
+                            android:textColorLink="@color/colorAccent"
+                            android:textSize="16sp"
+                            android:visibility="visible" />
+
+                        <ImageView
+                            android:id="@+id/categoryPopUp"
+                            android:layout_width="32dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.1"
+                            app:srcCompat="@drawable/ic_keyboard_arrow_down_grey_24dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        style="@style/titleText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="8dp"
+                        android:enabled="false"
+                        android:inputType="text"
+                        android:paddingStart="0dp"
+                        android:text="@string/material_stock"
+                        android:visibility="visible" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="0.5"
+                            android:orientation="vertical">
+
+
+                            <EditText
+                                android:id="@+id/amountText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8dp"
+
+                                android:background="@drawable/edit_selector"
+
+                                android:backgroundTintMode="src_over"
+
+                                android:hint="@string/piece_setAmounMaterial"
+                                android:inputType="numberDecimal"
+                                android:paddingBottom="8dp"
+
+                                android:textColor="@color/textColorPrimary"
+                                android:textColorHighlight="@color/colorAccentLight"
+                                android:textColorLink="@color/colorAccent"
+                                android:textSize="16sp"
+                                android:visibility="visible" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:orientation="vertical">
+
+                            <Spinner
+                                android:id="@+id/spinnerAmountType"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:layout_marginBottom="4dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/spinner_bakcground"
+                                android:drawSelectorOnTop="false"
+                                android:dropDownSelector="@drawable/drawable_color_accent_gradient"
+                                android:scrollbarSize="4dp"
+                                android:scrollbarStyle="outsideInset"
+                                android:scrollbarThumbVertical="@drawable/drawable_orange_gradient"
+                                android:scrollbarTrackVertical="@drawable/drawable_color_primary_gradient"
+                                android:scrollbars="vertical" />
+
+                            <TextView
+                                android:id="@+id/subTextView6a"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+
+                                android:layout_weight="1"
+
+                                android:text="@string/piece_units"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                                android:textColor="@color/textColorSecondary"
+                                android:textColorHighlight="@color/colorAccentLight"
+                                android:textColorLink="@color/colorAccent"
+                                android:visibility="visible" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        style="@style/titleText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="0dp"
+                        android:paddingEnd="0dp"
+                        android:paddingStart="0dp"
+                        android:text="@string/material_dealership" />
+
+                    <LinearLayout
+                        android:id="@+id/spinnerDealerContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left|center_vertical"
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical">
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        style="@style/titleText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="8dp"
+                        android:enabled="false"
+                        android:inputType="text"
+                        android:paddingEnd="0dp"
+                        android:paddingStart="0dp"
+                        android:text="@string/observation"
+                        android:textColor="@color/textColorSecondary"
+                        android:visibility="visible" />
+
+                    <EditText
+                        android:id="@+id/desciptionTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/spinner_shape"
+                        android:ems="10"
+                        android:inputType="textMultiLine"
+                        android:paddingBottom="8dp"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingTop="8dp"
+                        android:textColor="@color/textColorPrimary"
+                        android:textSize="16sp" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <Button
+                android:id="@+id/cancel_btn"
+                style="-"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dialog_Button_Height"
+                android:layout_marginRight="4dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/button_selector"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="@string/dialog_cancel" />
+
+            <Button
+                android:id="@+id/save_btn"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dialog_Button_Height"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/button_selector"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="@string/dialog_save" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

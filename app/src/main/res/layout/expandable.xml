@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.colorbuzztechgmail.spf.expandableContainer
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/expandable"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    app:ael_duration="50"
+    app:ael_expanded="false"
+    app:ael_interpolator="linear"
+    app:ael_orientation="vertical"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+</com.colorbuzztechgmail.spf.expandableContainer>

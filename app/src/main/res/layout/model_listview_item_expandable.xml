@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
+    <LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/cardContainer"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="false"
+        android:layout_centerVertical="true"
+        android:animateLayoutChanges="true"
+        android:background="@drawable/bg"
+        android:divider="@drawable/linedrawable"
+        android:dividerPadding="0dp"
+        android:elevation="1dp"
+        android:orientation="vertical"
+        android:showDividers="none">
+
+
+        <LinearLayout
+            android:id="@+id/animlayout"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+
+
+            android:layout_margin="0dp"
+            android:animateLayoutChanges="true"
+            android:background="@drawable/drawable_transparent"
+            android:clickable="true"
+            android:clipToPadding="false"
+            android:divider="@drawable/linedrawable"
+            android:dividerPadding="0dp"
+            android:orientation="vertical">
+
+
+            <com.colorbuzztechgmail.spf.CheckableLinearLayout
+                android:id="@+id/checkLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/checkedlayout"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.4">
+
+                    <TextView
+                        android:id="@+id/titleTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:ellipsize="marquee"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:nestedScrollingEnabled="true"
+                        android:paddingLeft="24dp"
+                        android:scrollIndicators="left"
+
+                        android:text="@{obj.name}"
+                        android:textColor="@color/textColorPrimary" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.4">
+
+                    <TextView
+                        android:id="@+id/subtitleTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingLeft="16dp"
+                        android:text="@{obj.date}"
+                        android:textColor="@color/textColorSecondary" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/toggleFrame"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_weight="0.2"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/toggleBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center_vertical"
+                        android:clickable="false"
+                        android:focusableInTouchMode="false"
+                        android:paddingRight="8dp"
+                        android:src="@drawable/ic_keyboard_arrow_down_grey_animatable_clockwise"
+                        android:visibility="gone" />
+                </FrameLayout>
+
+            </com.colorbuzztechgmail.spf.CheckableLinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp">
+
+            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                android:id="@+id/expandableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                app:ael_duration="50"
+                app:ael_expanded="false"
+                app:ael_interpolator="linear"
+                app:ael_orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:background="@color/iconsColor"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:divider="@drawable/linedrawable"
+                        android:dividerPadding="0dp"
+                        android:elevation="0dp"
+                        android:orientation="horizontal"
+                        android:showDividers="none">
+
+                        <LinearLayout
+                            android:layout_width="40dp"
+                            android:layout_height="@dimen/card_height"
+                            android:layout_gravity="top"
+                            android:background="@drawable/bg_primary_color"
+                            android:divider="@drawable/linedrawable"
+                            android:elevation="1dp"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:showDividers="none"
+                            android:weightSum="3">
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:layout_weight="1"
+                                android:elevation="0dp">
+
+                                <ImageButton
+                                    android:id="@+id/pieceBtn"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center_vertical|center_horizontal"
+                                    android:background="@drawable/piece_selector"
+
+                                    android:elevation="2dp"
+                                    android:visibility="visible"
+                                    app:srcCompat="@drawable/ic_shoe_grey" />
+
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:layout_weight="1">
+
+                                <ImageButton
+                                    android:id="@+id/leatherBtn"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center_vertical|center_horizontal"
+                                    android:background="@drawable/piece_selector"
+                                    android:elevation="2dp"
+                                    app:srcCompat="@drawable/ic_leather_grey" />
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:layout_marginRight="0dp"
+                                android:layout_weight="1">
+
+
+                                <ImageButton
+                                    android:id="@+id/InfoimageView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/piece_selector"
+                                    app:srcCompat="@drawable/ic_assessment_grey_48dp" />
+                            </FrameLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="false"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="8dp"
+                            android:animateLayoutChanges="true"
+
+                            android:orientation="vertical"
+                            android:showDividers="none">
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/card_height"
+                                android:layout_gravity="top"
+                                android:layout_marginBottom="4dp"
+                                android:elevation="1dp">
+
+                                <android.support.design.widget.FloatingActionButton
+                                    android:id="@+id/addFloating"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|right"
+                                    android:layout_margin="8dp"
+                                    app:backgroundTint="@color/colorAccentLight"
+                                    app:elevation="16dp"
+                                    app:fabSize="mini"
+                                    app:layout_constraintRight_toRightOf="parent"
+                                    app:srcCompat="@drawable/ic_menu_white_24dp" />
+
+                                <FrameLayout
+                                    android:id="@+id/frameExpand"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/card_height"
+                                    android:layout_marginBottom="4dp"
+                                    android:elevation="1dp">
+
+                                    <android.support.v7.widget.RecyclerView
+                                        android:id="@+id/recyclerInfo"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:background="@drawable/drawable_color_primary_gradient" />
+                                </FrameLayout>
+
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:id="@+id/infoContainer"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:animateLayoutChanges="false">
+
+                            </FrameLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+        </LinearLayout>
+</LinearLayout>
+

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_addMaterial"
+        android:enabled="true"
+        android:icon="@drawable/ic_add_plus_grey_24dp"
+        android:orderInCategory="100"
+        android:title="@string/action_addCustomMaterial"
+        android:visible="false">
+
+
+    </item>
+
+    <item
+        android:id="@+id/action_addpiece"
+        android:enabled="true"
+        android:icon="@drawable/ic_piece"
+        android:orderInCategory="200"
+        android:title="@string/action_addpiece"
+        android:visible="false">
+
+    </item>
+
+    <item
+        android:id="@+id/action_movepiece"
+        android:enabled="true"
+        android:icon="@drawable/ic_piece"
+        android:orderInCategory="300"
+        android:title="@string/piece_move"
+        android:visible="false">
+
+    </item>
+    <item
+    android:id="@+id/action_pieceList"
+    android:enabled="true"
+    android:icon="@drawable/ic_piece"
+    android:orderInCategory="400"
+    android:title="@string/action_piecesMaterial"
+    android:visible="false">
+
+</item>
+
+
+</menu>

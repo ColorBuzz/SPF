@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context="com.colorbuzztechgmail.spf.EditModel">
+
+    <data class="EditableModelBinding">
+
+        <import type="android.view.ViewGroup"/>
+
+        <variable name="fragment" type="com.colorbuzztechgmail.spf.EditModel"/>
+
+        <variable name="obj"
+            type="android.databinding.ObservableMap&lt;Integer, Object&gt;"/>
+
+        <variable name="obj1"
+            type="java.util.Map&lt;Integer,Object&gt;"/>
+    </data>
+
+
+    <android.support.v4.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+        <LinearLayout
+
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/containertem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="8dp"
+            android:background="@color/iconsColor"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+
+            <LinearLayout
+                android:id="@+id/image_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/panelselector"
+                android:divider="@drawable/lines_shape"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:showDividers="none|end"
+
+                android:visibility="@{fragment.isMultipleEditable}">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/textView28"
+                        style="@style/dialog_option_titleText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:drawableStart="@drawable/ic_image_primary_dark_24dp"
+                        android:enabled="false"
+                        android:gravity="center_vertical"
+                        android:inputType="text"
+                        android:paddingEnd="0dp"
+                        android:paddingStart="0dp"
+                        android:text="@string/action_save_as_image" />
+
+                    <FrameLayout
+                        android:id="@+id/undo_image_frame"
+                        android:layout_width="@dimen/dialog_Button_Height"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right"
+                        android:layout_marginLeft="8dp"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top|center"
+                            app:srcCompat="@drawable/ic_undo_selector" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center"
+                        android:layout_margin="8dp"
+                        app:cardCornerRadius="4dp"
+                        app:cardElevation="4dp">
+
+                        <ImageView
+                            android:id="@+id/imageContainer"
+                            android:layout_width="@{obj[fragment.MODEL_IMAGE] == null ? @dimen/piece_pic_detail_size : fragment.getScreenWidth ,default=@dimen/piece_pic_detail_size}"
+                            android:layout_height="@{obj[fragment.MODEL_IMAGE] == null ? @dimen/piece_pic_detail_size : fragment.getPanoramicHeight ,default=@dimen/piece_pic_detail_size}"
+                            android:layout_gravity="center"
+                            android:elevation="0dp"
+                            android:enabled="@{!fragment.isMultipleEditable}"
+                            android:onClick="@{fragment::onClick}"
+                            android:scaleType="centerCrop"
+                            android:src="@{obj[fragment.MODEL_IMAGE] ?? @drawable/add_image_shape}"
+                            android:visibility="visible" />
+                    </android.support.v7.widget.CardView>
+                </FrameLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/name_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/panelselector"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:visibility="@{fragment.isMultipleEditable}">
+
+                <TextView
+                    android:id="@+id/text"
+                    style="@style/dialog_option_titleText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:drawableStart="@drawable/ic_mode_edit_primary_dark_24dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="0dp"
+                    android:paddingStart="0dp"
+                    android:text="@string/piece_Name" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <EditText
+
+                        android:id="@+id/editModelNameTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/edit_selector"
+                        android:backgroundTintMode="src_over"
+                        android:enabled="@{!fragment.isMultipleEditable}"
+                        android:focusableInTouchMode="true"
+                        android:gravity="center_vertical"
+                        android:hint="@string/model_addNewModel"
+                        android:inputType="text"
+                        android:paddingBottom="8dp"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="@{obj[fragment.MODEL_NAME]}"
+                        android:textColor="@color/textColorPrimary"
+                        android:textColorHighlight="@color/colorAccentLight"
+                        android:textColorLink="@color/colorAccent"
+                        android:textSize="16sp"
+                        android:visibility="visible" />
+
+                    <FrameLayout
+                        android:id="@+id/undo_name_frame"
+                        android:layout_width="@dimen/dialog_Button_Height"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top|center"
+                            app:srcCompat="@drawable/ic_undo_selector" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/text"
+                    style="@style/dialog_option_titleText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:drawableStart="@drawable/ic_person_primary_dark_24dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="0dp"
+                    android:paddingStart="0dp"
+                    android:text="@string/model_custumer" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/spinnerCustumer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/spinner_bakcground"
+                        android:drawSelectorOnTop="false"
+                        android:scrollbarSize="4dp"
+                        android:scrollbarStyle="outsideInset"
+                        android:scrollbarThumbVertical="@drawable/drawable_orange_gradient"
+                        android:scrollbarTrackVertical="@drawable/drawable_color_primary_gradient"
+                        android:scrollbars="vertical"
+                        android:selectedItemPosition="@{(String)(obj[fragment.MODEL_CUSTUMER])}"
+                        android:spinnerMode="dialog"
+                        tools:listitem="@layout/spinneritem1" />
+
+                    <FrameLayout
+                        android:id="@+id/undo_custumer_frame"
+                        android:layout_width="@dimen/dialog_Button_Height"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top|center"
+                            app:srcCompat="@drawable/ic_undo_selector" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:showDividers="none"
+                android:visibility="@{fragment.isMultipleEditable}">
+
+                <TextView
+                    android:id="@+id/textView5"
+                    style="@style/dialog_option_titleText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:drawableStart="@drawable/ic_assessment_primary_dark_24dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="0dp"
+                    android:paddingStart="0dp"
+                    android:text="@string/piece_BaseSize" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/spinnerBaseSize"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/spinner_bakcground"
+                        android:drawSelectorOnTop="false"
+                        android:enabled="@{!fragment.isMultipleEditable}"
+                        android:scrollbarSize="4dp"
+                        android:scrollbarStyle="outsideInset"
+                        android:scrollbarThumbVertical="@drawable/drawable_orange_gradient"
+                        android:scrollbarTrackVertical="@drawable/drawable_color_primary_gradient"
+                        android:scrollbars="vertical"
+                        android:selectedItemPosition="@{(String)(obj[fragment.MODEL_BASE_SIZE])}"
+                        android:spinnerMode="dialog"
+                        tools:listitem="@layout/spinneritem1" />
+
+                    <FrameLayout
+                        android:id="@+id/undo_baseSize_frame"
+                        android:layout_width="@dimen/dialog_Button_Height"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top|center"
+                            app:srcCompat="@drawable/ic_undo_selector" />
+                    </FrameLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:showDividers="none">
+
+                <TextView
+                    android:id="@+id/textView5"
+                    style="@style/dialog_option_titleText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:drawableStart="@drawable/ic_folder_primary_dark_24dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="0dp"
+                    android:paddingStart="0dp"
+                    android:text="@string/action_directory" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/spinnerDirectory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/spinner_bakcground"
+                        android:drawSelectorOnTop="false"
+                        android:scrollbarSize="4dp"
+                        android:scrollbarStyle="outsideInset"
+                        android:scrollbarThumbVertical="@drawable/drawable_orange_gradient"
+                        android:scrollbarTrackVertical="@drawable/drawable_color_primary_gradient"
+                        android:scrollbars="vertical"
+                        android:selectedItemPosition="@{(String)(obj[fragment.MODEL_DIRECTORY])}"
+                        android:spinnerMode="dialog"
+                        tools:listitem="@layout/spinneritem1" />
+
+                    <FrameLayout
+                        android:id="@+id/undo_directory_frame"
+                        android:layout_width="@dimen/dialog_Button_Height"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top|center"
+                            app:srcCompat="@drawable/ic_undo_selector" />
+                    </FrameLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@drawable/lines_shape"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:showDividers="none"
+                android:visibility="@{fragment.isMultipleEditable}">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        style="@style/dialog_option_titleText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_search_primary_dark_24dp"
+                        android:enabled="false"
+                        android:gravity="center_vertical"
+                        android:inputType="text"
+                        android:paddingEnd="0dp"
+                        android:paddingStart="0dp"
+                        android:text="@string/observation"
+                        android:visibility="visible" />
+
+                    <FrameLayout
+                        android:id="@+id/undo_description_frame"
+                        android:layout_width="@dimen/dialog_Button_Height"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right"
+                        android:layout_marginLeft="8dp"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top|center"
+                            app:srcCompat="@drawable/ic_undo_selector" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/desciptionTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/spinner_bakcground"
+                    android:ems="10"
+                    android:enabled="@{!fragment.isMultipleEditable}"
+                    android:inputType="textMultiLine"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:paddingTop="8dp"
+                    android:text="@{obj[fragment.MODEL_DESCRIPTION] ?? fragment.emptyValue}"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
+</layout>
