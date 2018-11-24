@@ -214,7 +214,7 @@ MenuItem searchItem;
 
             case R.id.action_material_gen:
 
-                CustomMaterialGenerator.create(5000,this);
+                CustomMaterialGenerator.create(20,this);
 
                 return true;
 

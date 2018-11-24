@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+<data>
+
+    <variable
+        name="utils" type="com.colorbuzztechgmail.spf.Utils"
+        />
+    <variable name="map"
+        type="android.databinding.ObservableMap&lt;Integer, Object&gt;"/>
+
+    <variable name="fragment" type="com.colorbuzztechgmail.spf.QuerySearchFragment"/>
+
+    <import type="android.view.View"/>
+
+</data>
 
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/selectItemList"
@@ -36,6 +50,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/iconsColor"
                 android:clickable="true"
+                android:textColorHint="@color/textColorPrimary"
                 android:iconifiedByDefault="false"
                 android:queryHint="@string/action_search"
                 android:textColor="@color/textColorPrimary"
@@ -44,7 +59,8 @@
                 app:defaultQueryHint="@string/action_search"
                 app:queryHint="@string/action_search"
                 app:searchHintIcon="@drawable/ic_search_grey_24dp"
-                app:searchIcon="@drawable/ic_search_primary_dark_24dp" />
+                app:searchIcon="@drawable/ic_search_primary_dark_24dp"
+                app:voiceIcon="@drawable/ic_keyboard_voice_grey_24dp" />
         </android.support.v7.widget.CardView>
 
     </FrameLayout>
@@ -58,7 +74,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorLightPrimaryTransparent" />
+            android:background="@{((int) map[fragment.ITEMS_COUNT])== 0 ? @color/selectItemList : @color/colorLightPrimaryTransparent}" />
     </FrameLayout>
 </LinearLayout>
 
@@ -66,4 +82,4 @@
 
 </RelativeLayout>
 
-
+</layout>

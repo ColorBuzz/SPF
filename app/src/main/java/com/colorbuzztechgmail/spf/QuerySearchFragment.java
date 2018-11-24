@@ -4,7 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
+import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayMap;
+import android.databinding.ViewDataBinding;
 import android.databinding.adapters.SearchViewBindingAdapter;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,6 +30,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.colorbuzztechgmail.spf.adapter.BaseAdapter;
+import com.colorbuzztechgmail.spf.databinding.QuerySearchFragmentBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,8 +97,8 @@ public class QuerySearchFragment extends Fragment implements ItemActionListener,
     private QuerySeachAsyncTask querySeachAsyncTask;
      private RecyclerView mRecycler;
     private String myTag="";
-    private BaseFragment.FragmentType frType;
-    public ObservableArrayMap<Integer,String> mValuesMap;
+    public BaseFragment.FragmentType frType;
+    public ObservableArrayMap<Integer,Object> mValuesMap;
 
 
     public static String TAG="tag";
@@ -103,15 +106,24 @@ public class QuerySearchFragment extends Fragment implements ItemActionListener,
 
     public static final int ITEMS_COUNT=1;
 
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        final View view = inflater.inflate(R.layout.query_search_fragment, container, false);
+         ViewDataBinding mBinding=  DataBindingUtil.inflate(inflater,R.layout.query_search_fragment,container,false);
+
+
+
+        final View view = mBinding.getRoot();
+
         setHasOptionsMenu(true);
 
 
 
         ((SearchView)view.findViewById(R.id.searchView)).setOnQueryTextListener(this);
-
+        ((SearchView)view.findViewById(R.id.searchView)).onActionViewExpanded();
+        if(!((SearchView)view.findViewById(R.id.searchView)).isFocused()) {
+            ((SearchView)view.findViewById(R.id.searchView)).clearFocus();
+        }
         mRecycler=view.findViewById(R.id.recyclerView);
         db=new ModelDataBase(getContext());
 
@@ -129,6 +141,9 @@ public class QuerySearchFragment extends Fragment implements ItemActionListener,
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home_selector);
 
+        mBinding.setVariable(BR.fragment,this);
+        mBinding.setVariable(BR.map,mValuesMap);
+
         return view;
 
     }
@@ -143,8 +158,10 @@ public class QuerySearchFragment extends Fragment implements ItemActionListener,
             setFrType(BaseFragment.FragmentType.valueOf(getArguments().getString(FRAGMENT_TYPE)));
 
 
+        mValuesMap=new ObservableArrayMap<>();
 
 
+        mValuesMap.put(ITEMS_COUNT,0);
 
 
 
@@ -184,9 +201,8 @@ public class QuerySearchFragment extends Fragment implements ItemActionListener,
     protected void initializeValues() {
         setMyTag(getString(R.string.action_search));
 
-        mValuesMap=new ObservableArrayMap<>();
         db=new ModelDataBase(getContext());
-        adapter=new RecentListAdapter(this,(AppCompatActivity) getActivity(),false);
+        adapter=new RecentListAdapter(this,(AppCompatActivity) getActivity(),true);
         this.dataset=new RecentDataset(mRecycler,adapter);
         adapter.dataset=dataset;
 
@@ -248,6 +264,7 @@ public class QuerySearchFragment extends Fragment implements ItemActionListener,
 
         if (!items.isEmpty()) {
 
+
             if(dataset.size()==0){
 
 
@@ -288,8 +305,6 @@ public class QuerySearchFragment extends Fragment implements ItemActionListener,
     }
 
 
-
-
     @Override
     public boolean onQueryTextSubmit(String query) {
         return false;
@@ -297,7 +312,9 @@ public class QuerySearchFragment extends Fragment implements ItemActionListener,
 
     @Override
     public boolean onQueryTextChange(String query) {
-        mValuesMap.put(ITEMS_COUNT,query);
+
+        final String value=query;
+
 
 
         if(querySeachAsyncTask!=null){
@@ -307,32 +324,43 @@ public class QuerySearchFragment extends Fragment implements ItemActionListener,
                 querySeachAsyncTask.cancel(true);
             }
         }
-        cursorPos=0;
         if(query.trim().length()==0){
+
 
             return false;
         }
 
 
-        querySeachAsyncTask=new QuerySeachAsyncTask(getContext(),query,getFrType(),mCursor){
 
+        new Handler().post(new Runnable() {
             @Override
-            protected void onPostExecute(Cursor cursor) {
+            public void run() {
 
-               dismissQuerySearch();
+                querySeachAsyncTask=new QuerySeachAsyncTask(getContext(),value,getFrType(),mCursor){
 
-               newMoveCursorAsyncTask(cursor);
+                    @Override
+                    protected void onPostExecute(Cursor cursor) {
+                        cursorPos=0;
+                        dataset.removeAll();
+                        dismissQuerySearch();
 
-             }
+                        newMoveCursorAsyncTask(cursor);
 
-            @Override
-            protected void onCancelled() {
+                    }
+
+                    @Override
+                    protected void onCancelled() {
+
+                    }
+                };
+
+
+                querySeachAsyncTask.execute();
 
             }
-        };
+        });
 
 
-        querySeachAsyncTask.execute();
 
         return true;
 
@@ -424,9 +452,11 @@ public class QuerySearchFragment extends Fragment implements ItemActionListener,
 
                 @Override
                 protected void onPostExecute(List<Object> items) {
+                    cursorPos=cursorPos+items.size();
                     dismissLoading();
                     setMore(true);
                     fillDataset(items);
+
                 }
 
             };
@@ -628,7 +658,7 @@ public class QuerySearchFragment extends Fragment implements ItemActionListener,
                     }
                 }
                 try {
-                    Thread.sleep(millis);
+                    Thread.sleep(1500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
