@@ -83,6 +83,7 @@ MenuItem searchItem;
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        setTheme(R.style.AppTheme_NoActionBar);
         setContentView(R.layout.navigation_activity1);
         LoadView();
 

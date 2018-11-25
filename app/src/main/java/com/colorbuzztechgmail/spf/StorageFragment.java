@@ -452,7 +452,7 @@ public abstract class StorageFragment extends Fragment {
 
     }
 
-    public class CopyTask extends AsyncTask<Object, Integer, String> {
+    public class ImportModelAsyncTask extends AsyncTask<Object, Integer, String> {
 
         private ProgressDialog dialog;
         List<Object> files;

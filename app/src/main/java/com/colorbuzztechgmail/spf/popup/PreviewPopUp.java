@@ -224,9 +224,6 @@ public class PreviewPopUp extends  Dialog {
 
 
 
-
-
-
     public void showShare(){
 
 

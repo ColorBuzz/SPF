@@ -39,6 +39,7 @@ public abstract class BaseFragment extends Fragment implements SearchView.OnQuer
 
     public  enum FragmentType{
 
+        FILE,
         MODEL,
         MATERIAL,
         CUTNOTE,

@@ -1,12 +1,14 @@
 package com.colorbuzztechgmail.spf;
 
 import android.content.Context;
- import android.support.v7.widget.RecyclerView;
+import android.databinding.DataBindingUtil;
+import android.support.v7.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,6 +35,8 @@ public class FolderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private static int ITEM_LIST=3;
     private static int FOLDER_GRID=4;
     private static int FOLDER_LIST=5;
+    private static int PROGRESS_ITEM=6;
+
 
     public SparseBooleanArray sparseState;
 
@@ -48,6 +52,22 @@ public class FolderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         @Override
         public int compare(Object lhs,Object rhs) {
             String value1=null,value2=null;
+
+
+
+
+
+            if (lhs instanceof ProgressItem) {
+
+
+                return -1;
+            }else if(rhs instanceof ProgressItem){
+
+                return 1;
+
+            }
+
+
 
             if(lhs instanceof CustomHeader){
                 value1=((CustomHeader)lhs).getTitle();
@@ -71,14 +91,18 @@ public class FolderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
             }
 
-            if (lhs instanceof CustomHeader && !(rhs instanceof CustomHeader)) {
+            if (lhs instanceof CustomHeader && (!(rhs instanceof CustomHeader))) {
+
                 return -1;
-            }
 
-            if (rhs instanceof CustomHeader && !(lhs instanceof  CustomHeader)) {
+
+            } else if ((!(lhs instanceof CustomHeader)) && rhs instanceof CustomHeader) {
+
+
                 return 1;
-            }
 
+
+            }
             return value1.compareToIgnoreCase(value2);
         }
     };
@@ -134,11 +158,13 @@ public class FolderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public void clear(){
 
 
-        if(files.size()>0){
+        if(files!=null){
             files.clear();
 
         }
-        if(sparseState.size()>0){
+
+
+        if(sparseState!=null){
 
             sparseState.clear();
         }
@@ -169,6 +195,12 @@ public class FolderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             // set the view's size, margins, paddings and layout parameters
             return new FolderViewHolder(v);
 
+        }else if(viewType==PROGRESS_ITEM) {
+            v = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.progress_layout, parent, false);
+            // set the view's size, margins, paddings and layout parameters
+             return ProgressViewHolder.create(parent);
+
         }else{
 
             v = LayoutInflater.from(parent.getContext())
@@ -184,36 +216,39 @@ public class FolderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public int getItemViewType(int position) {
 
-        if(vieMode==LIST){
+        if (vieMode == LIST) {
 
 
-            if(isHeader(position)){
+            if (isHeader(position)) {
 
                 return FOLDER_LIST;
+
+            } else if( files.get(position) instanceof ProgressItem ){
+
+                return PROGRESS_ITEM;
 
             }else{
 
                 return ITEM_LIST;
-
             }
 
-        }else{
+        } else {
 
-
-
-            if(isHeader(position)){
+            if (isHeader(position)) {
 
                 return FOLDER_GRID;
 
-            }else{
+            }  else if( files.get(position) instanceof ProgressItem ){
+
+                return PROGRESS_ITEM;
+
+            }else {
 
                 return ITEM_GRID;
 
             }
 
         }
-
-
 
     }
 
@@ -227,6 +262,7 @@ public class FolderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
 
         if(files.get(position) instanceof CustomHeader){
+
          final   CustomHeader customHeader = (CustomHeader) files.get(position);
 
 
@@ -260,6 +296,10 @@ public class FolderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
  
         
+        }else if (files.get(position) instanceof ProgressItem){
+
+            ((ProgressViewHolder)holder).performBind(files.get(position));
+
         }else{
 
 
@@ -274,7 +314,7 @@ public class FolderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             final  File file=(File) files.get(position);
 
 
-            ((ItemViewHolder)holder).checkBox.setText(file.getName());
+            ((ItemViewHolder)holder).fileTxt.setText(file.getName());
             ((ItemViewHolder)holder).dataTxt.setText(Utils.getDate(file.lastModified()));
 
             ((ItemViewHolder)holder).setItemClickListener(new ItemClickListener() {
@@ -284,77 +324,44 @@ public class FolderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         // Utils.toast(context, "LONGCLICK" + String.valueOf(position));
 
                     } else {
-                        ((ItemViewHolder)holder).checkBox.setSelected(true);
-
-                        switch (v.getId()){
-
-
-                            case R.id.infoLinearLAyout:
+                        ((ItemViewHolder)holder).fileTxt.setSelected(true);
 
                                 ((ItemViewHolder)holder).checkBox.setChecked(!(((ItemViewHolder)holder).checkBox).isChecked());
 
+                        if(((ItemViewHolder)holder).checkBox.isChecked()){
 
-                                if(sparseState.indexOfKey(position)!=-1){
-
-                                    sparseState.put(position,((ItemViewHolder)holder).checkBox.isChecked());
-
+                            ((ItemViewHolder)holder).checkBox.setVisibility(View.VISIBLE );
 
 
 
-                                }else{
+                        }else{
 
-                                    sparseState.append(position,((ItemViewHolder)holder).checkBox.isChecked());
-
-                                }
-
-                                if(((ItemViewHolder)holder).checkBox.isChecked()){
-
-                                    checkedItemCount++;
-
-
-                                }else{
-
-
-                                    checkedItemCount--;
-                                }
-
-
-                                break;
-
-
-                            case R.id.checkBox4:
-
-
-
-                                if(sparseState.indexOfKey(position)!=-1){
-
-                                    sparseState.put(position,((ItemViewHolder)holder).checkBox.isChecked());
-
-
-
-
-                                }else{
-
-                                    sparseState.append(position,((ItemViewHolder)holder).checkBox.isChecked());
-
-                                }
-
-                                if(((ItemViewHolder)holder).checkBox.isChecked()){
-
-                                    checkedItemCount++;
-
-
-                                }else{
-
-
-                                    checkedItemCount--;
-                                }
-
-
-                                break;
-
+                            ((ItemViewHolder)holder).checkBox.setVisibility(View.GONE );
 
                         }
+                                if(sparseState.indexOfKey(position)!=-1){
+
+                                    sparseState.put(position,((ItemViewHolder)holder).checkBox.isChecked());
+
+
+
+
+                                }else{
+
+                                    sparseState.append(position,((ItemViewHolder)holder).checkBox.isChecked());
+
+                                }
+
+                                if(((ItemViewHolder)holder).checkBox.isChecked()){
+
+                                    checkedItemCount++;
+
+
+                                }else{
+
+
+                                    checkedItemCount--;
+                                }
 
 
                                 if(itemActionListener!=null){
@@ -449,7 +456,7 @@ public class FolderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         ItemsBinding mBinding;
         public CheckBox checkBox;
         ImageView imageView;
-        TextView dataTxt;
+        TextView fileTxt,dataTxt;
         private ItemClickListener itemClickListener;
 
         public ItemViewHolder(View v) {
@@ -457,6 +464,8 @@ public class FolderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
             checkBox=v.findViewById(R.id.checkBox4);
              dataTxt=v.findViewById(R.id.dataText);
+            fileTxt=v.findViewById(R.id.fileName);
+
             v.findViewById(R.id.infoLinearLAyout).setOnLongClickListener(this);
             v.findViewById(R.id.infoLinearLAyout).setOnClickListener(this);
             checkBox.setOnClickListener(this);

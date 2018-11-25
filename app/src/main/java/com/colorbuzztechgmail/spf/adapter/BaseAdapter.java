@@ -511,7 +511,9 @@ public abstract class BaseAdapter extends RecyclerView.Adapter<ViewHolderMultiCh
     @Override
     public void ToggleTitle(View header, String title) {
 
-        toggleItem(header, dataset.getHeaderPosition(title));
+        int pos= dataset.getHeaderPosition(title);
+        if(pos>=0)
+        toggleItem(header, pos);
 
 
     }

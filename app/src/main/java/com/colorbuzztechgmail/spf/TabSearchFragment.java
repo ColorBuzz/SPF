@@ -103,7 +103,6 @@ public class TabSearchFragment extends Fragment implements SearchView.OnQueryTex
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         final View view=inflater.inflate(R.layout.search_tab_fragment,container,false);
-        setHasOptionsMenu(true);
 
         backBtn=((FloatingActionButton)getActivity().findViewById(R.id.fabbutton));
         backBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_open_in_browser_white_24dp));
@@ -144,46 +143,9 @@ public class TabSearchFragment extends Fragment implements SearchView.OnQueryTex
 
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-
-           menu.clear();
-
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
 
 
 
-// You can hide the state of the menu item here if you call getActivity().supportInvalidateOptionsMenu(); somewhere in your code
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        //noinspection SimplifiableIfStatement
-        switch (item.getItemId()){
-
-            case R.id.action_viewBar:
-
-
-
-                return true;
-
-            case R.id.action_searchBar:
-
-                loadSearchBar();
-
-
-                return true;
-
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     private void setupPaths(){
 

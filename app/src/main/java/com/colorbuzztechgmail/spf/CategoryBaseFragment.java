@@ -232,6 +232,30 @@ public abstract class CategoryBaseFragment extends Fragment implements  Utils.on
 
                             break;
 
+                        case MODEL_CUSTUMER:
+
+
+                            if(!db.existCustumer(category)){
+
+                                final Custumer custumer=new Custumer(category);
+
+
+                                final Category category1= db.getCustumerCategory((db.addCustumer(custumer)));
+
+                                ((CategoryFragment.CategoryAdapter)adapter).add(category1);
+
+                                alertDialog.dismiss();
+
+
+                            }else{
+
+
+                                Utils.toast(getContext(),getResources().getString(R.string.action_DuplicateCategory));
+
+
+                            }
+
+                            break;
 
                     }
 

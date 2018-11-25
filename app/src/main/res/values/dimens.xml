@@ -23,7 +23,7 @@
 
     <dimen name="dialog_Button_Height">36dp</dimen>
 
-    <integer name="maxItemLoad">50</integer>
+    <integer name="maxItemLoad">10</integer>
 
 
 

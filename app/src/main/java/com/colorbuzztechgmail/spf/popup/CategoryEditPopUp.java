@@ -133,8 +133,6 @@ public class CategoryEditPopUp extends Dialog    {
 
                     for (int i = 0; i < removeCategories.size(); i++) {
 
-
-
                             deleteCategory(removeCategories.get(i).getId());
 
 
@@ -332,7 +330,9 @@ public class CategoryEditPopUp extends Dialog    {
             case MODEL_CUSTUMER:
 
 
-                break;
+
+
+              return db.isCustumerAssigned(categoryId);
 
             case MATERIAL_TYPE:
 
@@ -370,6 +370,8 @@ public class CategoryEditPopUp extends Dialog    {
 
 
             case MODEL_CUSTUMER:
+
+                db.updateCustumer(categoryId,newCategory,null,null,null,null,null);
 
 
                 break;
@@ -422,7 +424,7 @@ public class CategoryEditPopUp extends Dialog    {
 
 
             case MODEL_CUSTUMER:
-
+                db.deleteCustumer(categoryId);
 
                 break;
 

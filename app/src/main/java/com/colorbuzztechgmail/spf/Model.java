@@ -29,7 +29,7 @@ public class Model  implements SortedListAdapter.ViewModel{
     private boolean middleSize;
     private boolean quarterSize;
     private boolean threeQuarterSize;
-    private String custumer;
+    private String custumer=null;
 
     public String getCustumer() {
         return custumer;

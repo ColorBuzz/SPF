@@ -46,7 +46,36 @@
                 android:padding="2dp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
                 android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
                 android:textStyle="normal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/searchContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/checkedcardlayout"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:weightSum="1">
+
+            <android.support.v7.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/iconsColor"
+                android:clickable="true"
+                android:iconifiedByDefault="false"
+                android:queryHint="@string/action_search"
+                android:textColor="@color/textColorPrimary"
+                android:textColorHint="@color/textColorPrimary"
+                app:closeIcon="@drawable/ic_close_black_24dp"
+                app:commitIcon="@drawable/ic_search_grey_24dp"
+                app:defaultQueryHint="@string/action_search"
+                app:queryHint="@string/action_search"
+                app:searchHintIcon="@drawable/ic_search_grey_24dp"
+                app:searchIcon="@drawable/ic_search_primary_dark_24dp"
+                app:voiceIcon="@drawable/ic_keyboard_voice_grey_24dp" />
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView

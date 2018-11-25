@@ -1,18 +1,26 @@
 package com.colorbuzztechgmail.spf;
 
+import android.content.Context;
+import android.databinding.adapters.SearchViewBindingAdapter;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.github.kimkevin.cachepot.CachePot;
 
 import java.io.File;
 import java.util.ArrayDeque;
@@ -21,7 +29,9 @@ import java.util.Arrays;
 import java.util.Deque;
 import java.util.List;
 
-public class PhoneStorageFragment extends StorageFragment implements  ItemClickListener{
+import static android.content.Context.INPUT_METHOD_SERVICE;
+
+public class PhoneStorageFragment extends StorageFragment implements  ItemClickListener,SearchView.OnQueryTextListener{
 
     public static PhoneStorageFragment newInstance(String path,String type) {
 
@@ -53,6 +63,9 @@ public class PhoneStorageFragment extends StorageFragment implements  ItemClickL
     private GridSpacingItemDecoration itemDecoration;
     private  int nColumn=0;
     private  int spaceItem=8;
+    private SearchFilesAsync searchFilesAsync;
+    private SearchView mSearchView;
+    private boolean start=false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,13 +73,39 @@ public class PhoneStorageFragment extends StorageFragment implements  ItemClickL
 
         folderAdapter = new FolderAdapter(getContext(),null,viewMode);
 
-
     }
 
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)  {
+        start=false;
 
+        setHasOptionsMenu(true);
         final View view=inflater.inflate(R.layout.search_fragment,container,false);
+
+        mSearchView=(SearchView)view.findViewById(R.id.searchView);
+        mSearchView.setOnQueryTextListener(this);
+        mSearchView.onActionViewExpanded();
+
+        mRecycler=view.findViewById(R.id.recyclerView);
+
+
+
+        if(mSearchView.isFocused()) {
+            mSearchView.clearFocus();
+        }
+
+
+        ImageView closeButton = (ImageView) mSearchView.findViewById(R.id.search_close_btn);
+
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                hideKeyboard();
+                mSearchView.setQuery("",false);
+                mSearchView.clearFocus();
+            }
+        });
 
 
 
@@ -96,20 +135,40 @@ public class PhoneStorageFragment extends StorageFragment implements  ItemClickL
 
 
         }
-        setupRecycler(view);
-
+        customView(viewMode);
         return view;
     }
 
-
-    private void setupRecycler(View v){
-
-        mRecycler=v.findViewById(R.id.recyclerView);
-
-        customView(viewMode);
-
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+
+
+        switch (item.getItemId()){
+
+
+            case R.id.action_search:
+
+
+
+                return true;
+
+
+
+        }
+
+
+
+        return false;
+    }
+
+
 
     public void setupAdapter(List<Object> header) {
 
@@ -218,7 +277,7 @@ public class PhoneStorageFragment extends StorageFragment implements  ItemClickL
                 bufferModel.add(fileItem);
 
             }
-        new CopyTask().execute(bufferModel.toArray());
+        new ImportModelAsyncTask().execute(bufferModel.toArray());
 
 /*
 
@@ -274,7 +333,8 @@ public class PhoneStorageFragment extends StorageFragment implements  ItemClickL
                         obj[0] = path;
 
 
-                        new SearchFilesAsync().execute(obj);
+                        searchFilesAsync= new SearchFilesAsync();
+                        searchFilesAsync.execute(obj);
 
 
                     }
@@ -298,7 +358,9 @@ public class PhoneStorageFragment extends StorageFragment implements  ItemClickL
                         obj[0] = path;
 
 
-                        new SearchFilesAsync().execute(obj);
+
+                        searchFilesAsync= new SearchFilesAsync();
+                        searchFilesAsync.execute(obj);
 
 
                     }
@@ -321,7 +383,7 @@ public class PhoneStorageFragment extends StorageFragment implements  ItemClickL
         List<File> listFile=new ArrayList<>();
         listFile = Arrays.asList(dir.listFiles());
 
-        CustomHeader rootHeader=new CustomHeader(dir.getName(),999,null);
+        CustomHeader rootHeader=new CustomHeader(dir.getName(),Utils.IdMaker.next(),null);
 
         if (listFile != null) {
             for (int i = 0; i < listFile.size(); i++) {
@@ -335,12 +397,13 @@ public class PhoneStorageFragment extends StorageFragment implements  ItemClickL
                     for(int j=0;j<dirs.size();j++){
 
                         List<File> aux=new ArrayList<>();
-
                         final File auxDir=dirs.pop();
+
                         aux.addAll(Arrays.asList(auxDir.listFiles()));
 
                         if(aux.size()>0) {
-                            CustomHeader header= new CustomHeader(auxDir.getName(),j,null);
+
+                            CustomHeader header= new CustomHeader(auxDir.getName(),Utils.IdMaker.next(),null);
 
                             for (File file : aux) {
 
@@ -395,28 +458,182 @@ public class PhoneStorageFragment extends StorageFragment implements  ItemClickL
 
     }
 
+    public List<Object> dirSearch(File dir,String query) {
+
+
+        List<Object> HeaderList=new ArrayList<>();
+        Deque<File> dirs = new ArrayDeque<File>();
+
+        List<File> listFile=new ArrayList<>();
+        listFile = Arrays.asList(dir.listFiles());
+
+        CustomHeader rootHeader=new CustomHeader(dir.getName(),Utils.IdMaker.next(),null);
+
+        if (listFile != null) {
+            for (int i = 0; i < listFile.size(); i++) {
+
+
+                if (listFile.get(i).isDirectory()) {
+
+
+                    dirs.push(listFile.get(i));
+
+                    for(int j=0;j<dirs.size();j++){
+
+                        List<File> files=new ArrayList<>();
+                        final File auxDir=dirs.pop();
+
+                        files.addAll(Arrays.asList(auxDir.listFiles()));
+
+                        if(files.size()>0) {
+
+                            CustomHeader header= new CustomHeader(auxDir.getName(),Utils.IdMaker.next(),null);
+
+                            for (File file : files) {
+
+                                if (file.isDirectory()) {
+
+                                    dirs.add(file);
+                                    j--;
+
+                                } else {
+
+                                    if (file.getName().toLowerCase().endsWith(".spf")) {
+
+                                        if(file.getName().toLowerCase().contains(query.toLowerCase())){
+
+                                            HeaderList.add(file);
+                                        }
+
+
+
+                                    }
+                                }
+
+                            }
+
+
+                        }
+
+
+                    }
+
+
+                } else {
+                    if (listFile.get(i).getName().toLowerCase().endsWith(".spf")){
+                        if(listFile.get(i).getName().toLowerCase().contains(query.toLowerCase())){
+
+                            HeaderList.add(listFile.get(i));
+                        }
+
+
+                    }
+                }
+            }
+
+
+
+        }
+
+        return HeaderList;
+
+
+
+    }
+
+
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(final String query) {
+
+
+      if  (searchFilesAsync!=null){
+
+            if(searchFilesAsync.getStatus().equals(AsyncTask.Status.RUNNING)){
+
+                searchFilesAsync.cancel(true);
+                folderAdapter.clear();
+                if(waitPoup!=null){
+                    waitPoup.dismiss();
+
+                }
+            }
+        }
+        if(query.trim().length()==0){
+
+            if(folderAdapter!=null && start){
+                folderAdapter.clear();
+                initSearch();
+
+            }
+            return true;
+        }
+
+
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+
+                Object[] obj = new Object[2];
+                obj[0] = path;
+                obj[1] = query;
+
+
+                searchFilesAsync = new SearchFilesAsync();
+                searchFilesAsync.execute(obj);
+                setImportFile(false);
+            }
+        });
+
+
+        return true;
+    }
+
     public class SearchFilesAsync extends AsyncTask<Object, Float, List<Object>> {
 
         protected void onPreExecute() {
 
-            waitPoup = com.colorbuzztechgmail.spf.popup.waitPoup.newInstance(getString(R.string.dialog_searchFiles));
+            List<Object> list=new ArrayList<>();
+
+            list.add(new ProgressItem("",0));
+            folderAdapter.clear();
+            setupAdapter(list);
 
 
-            waitPoup.show(getFragmentManager(), "waitPopup");
         }
 
         protected List<Object> doInBackground(Object[] path) {
 
             try {
 
-                if (path[0] != null) {
+                if(path.length>1){
+
+
                     File f = new File((String) path[0]);
 
                     if (f.exists()) {
-                        return dirSearch(f);
+                        return dirSearch(f,(String) path[1]);
 
                     }
+
+                }else{
+
+                    if (path[0] != null) {
+                        File f = new File((String) path[0]);
+
+                        if (f.exists()) {
+                            return dirSearch(f);
+
+                        }
+                    }
                 }
+
+
 
 
             } catch (Exception e) {
@@ -437,7 +654,7 @@ public class PhoneStorageFragment extends StorageFragment implements  ItemClickL
         @Override
         protected void onPostExecute(List<Object> headers) {
 
-            waitPoup.dismiss();
+            folderAdapter.clear();
 
             if (headers != null) {
 
@@ -455,6 +672,7 @@ public class PhoneStorageFragment extends StorageFragment implements  ItemClickL
     @Override
     public void onClick(View v, int position, boolean isLongClick) {
         if(folderAdapter.isHeader(position)){
+
             dirs.push(folderAdapter.getFiles());
             CustomHeader header=(CustomHeader) folderAdapter.getItem(position);
             updatePathBar(true,header.getTitle());
@@ -512,5 +730,21 @@ public class PhoneStorageFragment extends StorageFragment implements  ItemClickL
 
         updateBar();
 
+    }
+
+    private void hideKeyboard() {
+        View view = getActivity().getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+
+    @Override
+    public void onStart() {
+
+        start=true;
+        super.onStart();
     }
 }

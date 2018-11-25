@@ -483,9 +483,9 @@ public class ModelDataBase extends SQLiteOpenHelper {
                 + MODEL_COLUMN_BASE_SIZE + ","+MODEL_COLUMN_DESCRIPT
                 +") VALUES " + "(new."+ KEY_ID + ",new."+ MODEL_COLUMN_NAME
                 +", (SELECT " + DIRECTORY_COLUMN_NAME +" FROM " + TABLE_DIRECTORY  + " WHERE " + KEY_ID + " IN (SELECT " + KEY_DIRECTORY_ID + " FROM " + TABLE_MODEL_DIRECTORY_RELATIONS + " tmd"
-                + " WHERE tmd." + KEY_DIRECTORY_ID + " = " + "new." + KEY_ID +"))"
+                + " WHERE tmd." + KEY_MODEL_ID + " = " + "new." + KEY_ID +"))"
                 +",(SELECT " + CUSTUMER_COLUMN_NAME +" FROM " + TABLE_CUSTUMER  + " WHERE " + KEY_ID + " IN (SELECT " + KEY_CUSTUMER_ID + " FROM " + TABLE_MODEL_CUSTUMER_RELATIONS + " tmc"
-                + " WHERE tmc." + KEY_CUSTUMER_ID + " = " + "new." + KEY_ID +"))"
+                + " WHERE tmc." + KEY_MODEL_ID + " = " + "new." + KEY_ID +"))"
                 + ",new."+ MODEL_COLUMN_BASE_SIZE+",new."+ MODEL_COLUMN_DESCRIPT+ ");"
                 + " UPDATE " + FTS_CUTNOTE_LIST
                 + " SET "+  MODEL_COLUMN_NAME+ "=new."+ MODEL_COLUMN_NAME + " WHERE "+ MODEL_COLUMN_NAME + "=old."+MODEL_COLUMN_NAME + ";"
@@ -497,7 +497,10 @@ public class ModelDataBase extends SQLiteOpenHelper {
 
         db.execSQL( "CREATE TRIGGER " +  TRG_CUS_AU + " AFTER UPDATE ON " + TABLE_CUSTUMER
                 +  " BEGIN UPDATE " + FTS_MODEL
-                + " SET "+  CUSTUMER_COLUMN_NAME+ "=new."+ CUSTUMER_COLUMN_NAME + " WHERE "+ CUSTUMER_COLUMN_NAME + "=old."+CUSTUMER_COLUMN_NAME + "; END;");
+                + " SET "+  CUSTUMER_COLUMN_NAME+ "=new."+ CUSTUMER_COLUMN_NAME + " WHERE "+ CUSTUMER_COLUMN_NAME + "=old."+CUSTUMER_COLUMN_NAME + ";"
+                + " UPDATE " + FTS_CUTNOTE_LIST
+                + " SET "+  CUSTUMER_COLUMN_NAME+ "=new."+ CUSTUMER_COLUMN_NAME + " WHERE "+ CUSTUMER_COLUMN_NAME + "=old."+CUSTUMER_COLUMN_NAME + ";"
+                + " END;");
 
 
 
@@ -1174,16 +1177,17 @@ public class ModelDataBase extends SQLiteOpenHelper {
 
 
         insertModelDirectoryRelation(id,getDirectoryId(model.getDirectory()));
-        if(model.getCustumer()!=null){
-
-            insertModelCustumerRelation(id,getCustumerId(model.getCustumer()));
 
 
-        }else {
-            insertModelCustumerRelation(id,1);
+
+
+
+        if(model.getCustumer()==null){
+           model.setCustumer(mContext.getString(R.string.importNoAsigned_Cat));
 
         }
 
+        insertModelCustumerRelation(id,getCustumerId( mContext.getString(R.string.importNoAsigned_Cat)));
 
         ContentValues contentValues1=new ContentValues();
 
@@ -5041,6 +5045,33 @@ public class ModelDataBase extends SQLiteOpenHelper {
         return db.insert(TABLE_CUSTUMER, null, contentValues);
 
     }
+    public boolean updateCustumer(int id, String name, @Nullable String phone, @Nullable String adress, @Nullable String email, @Nullable String company, @Nullable String date) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String filter = "_id=";
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(CUSTUMER_COLUMN_NAME, name);
+        if (phone != null) {
+            contentValues.put(CUSTUMER_COLUMN_PHONE, phone);
+        }
+        if (adress != null) {
+
+            contentValues.put(CUSTUMER_COLUMN_ADRESS, adress);
+        }
+        if (email != null) {
+
+            contentValues.put(CUSTUMER_COLUMN_EMAIL, email);
+        }
+
+        if (company != null) {
+
+            contentValues.put(CUSTUMER_COLUMN_COMPANY, company);
+        }
+        if (date != null) {
+
+            contentValues.put(CUSTUMER_COLUMN_DATE, date);
+        }
+        return db.update(TABLE_CUSTUMER, contentValues, filter + "=" + id, null) > 0;
+    }
 
     public Long getCustumerId(String custumerName){
 
@@ -5117,6 +5148,7 @@ public class ModelDataBase extends SQLiteOpenHelper {
 
         try {
             if (c.moveToFirst()) {
+
                 do {
 
 
@@ -5130,7 +5162,6 @@ public class ModelDataBase extends SQLiteOpenHelper {
 
                             categories.add(category);
 
-                            break;
 
 
                         }
@@ -5172,6 +5203,78 @@ public class ModelDataBase extends SQLiteOpenHelper {
 
 
 
+    }
+
+    public boolean existCustumer(String custumerName){
+
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        boolean exist=false;
+
+        String filter = CUSTUMER_COLUMN_NAME;
+
+        Cursor cursor = db.rawQuery(
+                "select * from " + TABLE_CUSTUMER + " where " + filter + "= ?" +  " or " + filter + "= ?", new String[]{custumerName,custumerName.toLowerCase()});
+
+
+        try {
+
+            while (cursor.moveToNext()) {
+                exist=true;
+                break;
+
+            }
+            cursor.close();
+
+        } catch (Exception e) {
+            Utils.toast(mContext, e.toString());
+        }
+
+        return exist;
+    }
+    public boolean deleteCustumer(long custumerId) {
+
+        boolean delete=false;
+        SQLiteDatabase db = this.getWritableDatabase();
+        delete= db.delete(TABLE_CUSTUMER, KEY_ID + " =? ", new String[]{String.valueOf(custumerId)}) > 0;
+
+        if(delete){
+
+            removeModelCustumerRelation(custumerId);
+        }
+
+        return  delete;
+    }
+    public boolean isCustumerAssigned(long id) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        boolean exist=false;
+
+        String filter = KEY_CUSTUMER_ID;
+
+        Cursor cursor = db.rawQuery(
+                "select * from " + TABLE_MODEL_CUSTUMER_RELATIONS+ " where " + filter + "= ?", new String[]{String.valueOf(id)});
+
+
+
+
+
+        try {
+
+            while (cursor.moveToNext()) {
+                exist=true;
+                break;
+
+            }
+            cursor.close();
+
+        } catch (Exception e) {
+            Utils.toast(mContext, e.toString());
+        }
+
+
+        return exist;
     }
 
 

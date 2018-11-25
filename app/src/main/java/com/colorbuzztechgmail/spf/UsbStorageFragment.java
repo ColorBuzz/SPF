@@ -15,6 +15,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -159,6 +162,36 @@ public class UsbStorageFragment extends StorageFragment implements ItemClickList
 
 
         return view;
+    }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+
+        inflater.inflate(R.menu.menu_main,menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+
+
+        switch (item.getItemId()){
+
+
+            case R.id.action_search:
+
+
+                Utils.toast(getContext(),"SEARCH");
+
+                return true;
+
+
+
+        }
+
+
+
+        return false;
     }
 
 
@@ -554,6 +587,9 @@ public class UsbStorageFragment extends StorageFragment implements ItemClickList
     }
     @Override
     protected void PrepareDataToImport(String directory) {
+
+
+
 
     }
 

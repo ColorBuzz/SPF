@@ -29,37 +29,78 @@
         android:showDividers="end">
 
         <LinearLayout
-            android:id="@+id/infoLinearLAyout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="@drawable/linedrawable"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:padding="4dp">
+            android:animateLayoutChanges="true"
+            android:orientation="horizontal"
+            android:padding="8dp">
 
             <CheckBox
                 android:id="@+id/checkBox4"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/dialog_Button_Height"
 
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:button="@drawable/checkbox_selector"
+                android:layout_height="@dimen/dialog_Button_Height"
+                android:layout_gravity="center_vertical"
                 android:ellipsize="marquee"
                 android:focusableInTouchMode="true"
+                android:gravity="center"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:text="@string/warning_emptyName"
-                android:textAppearance="?android:textAppearanceListItem" />
+                android:textAppearance="?android:textAppearanceListItem"
+                android:visibility="gone" />
 
-            <TextView
-                android:id="@+id/dataText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:text="@string/material_date"
-                android:textAlignment="textEnd"
-                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                android:textColor="@color/textColorSecondary" />
+            <LinearLayout
+                android:id="@+id/infoLinearLAyout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:divider="@drawable/linedrawable"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp">
+
+                <TextView
+                    android:id="@+id/fileName"
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:ellipsize="marquee"
+                    android:focusableInTouchMode="true"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="@string/warning_emptyName"
+                    android:textAlignment="textStart"
+                    android:textAppearance="?android:textAppearanceListItem" />
+                />
+
+                <TextView
+                    android:id="@+id/dataText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/material_date"
+                    android:textAlignment="textStart"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:textColor="@color/textColorSecondary" />
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:padding="8dp">
+
+                <ImageView
+                    android:id="@+id/imageView15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/ic_search_grey_24dp" />
+            </FrameLayout>
 
         </LinearLayout>
 

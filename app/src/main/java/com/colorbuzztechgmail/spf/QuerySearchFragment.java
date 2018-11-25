@@ -129,7 +129,7 @@ public class QuerySearchFragment extends Fragment implements SearchView.OnQueryT
 
         ((SearchView)view.findViewById(R.id.searchView)).setOnQueryTextListener(this);
         ((SearchView)view.findViewById(R.id.searchView)).onActionViewExpanded();
-        if(!((SearchView)view.findViewById(R.id.searchView)).isFocused()) {
+        if(((SearchView)view.findViewById(R.id.searchView)).isFocused()) {
             ((SearchView)view.findViewById(R.id.searchView)).clearFocus();
         }
         mRecycler=view.findViewById(R.id.recyclerView);
@@ -214,6 +214,7 @@ public class QuerySearchFragment extends Fragment implements SearchView.OnQueryT
         db=new ModelDataBase(getContext());
         adapter=new RecentListAdapter(listener,(AppCompatActivity) getActivity(),false);
         this.dataset=new RecentDataset(mRecycler,adapter);
+        dataset.setSortType(RecentDataset.RecentSortType.NAME);
         adapter.dataset=dataset;
         waitScreen=new waitScreen("",1000);
 
